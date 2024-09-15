@@ -5,7 +5,7 @@ description = "This project aims to predict meme success on Reddit with a multim
 authors = [{ name = "Francisco Gomes", email = "46953@novasbe.pt" }, { name = "Guilherme Raimundo", email = "46953@novasbe.pt" }, { name = "Marta Dinis", email = "46953@novasbe.pt" }, { name = "Martim Costa", email = "46953@novasbe.pt" }, { name = "Martim Esteves", email = "46953@novasbe.pt" }]
 readme = "README.md"
 keywords = ['python']
-requires-python = ">=3.12,<4.0"
+requires-python = ">=3.12,<3.13"
 dependencies = [
     "dask>=2024.9.0",
     "dask-ml>=2024.4.4",
