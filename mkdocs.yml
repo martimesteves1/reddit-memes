@@ -2,10 +2,10 @@ site_name: reddit-memes
 repo_url: https://github.com/martimesteves1/reddit-memes
 site_url: https://martimesteves1.github.io/reddit-memes
 site_description: This project aims to predict meme success on Reddit with a multimodal approach using computer vision, generative AI and other techniques.
-site_author: Martim Esteves
+site_author: Francisco Gomes; Guilherme Raimundo; Marta Dinis; Martim Costa; Martim Esteves;
 edit_uri: edit/main/docs/
 repo_name: martimesteves1/reddit-memes
-copyright: Maintained by <a href="https://martimesteves1.com">Florian</a>.
+copyright: ""
 
 nav:
   - Home: index.md
@@ -16,8 +16,8 @@ plugins:
       handlers:
         python:
           setup_commands:
-              - import sys
-              - sys.path.append('../')
+            - import sys
+            - sys.path.append('../')
 theme:
   name: material
   feature:
@@ -44,8 +44,6 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/martimesteves1/reddit-memes
-    - icon: fontawesome/brands/python
-      link: https://pypi.org/project/reddit-memes
 
 markdown_extensions:
   - toc:
