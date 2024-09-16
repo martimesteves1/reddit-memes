@@ -3,7 +3,7 @@ install: ## Install the virtual environment and install the pre-commit hooks
 	@echo "🚀 Creating virtual environment using uv"
 	@uv sync
 	@uv run pre-commit install
-	@python -m ipykernel install --user --name=reddit-memes --display-name="Reddit Memes Kernel"
+	@uv run python -m ipykernel install --user --name=reddit-memes --display-name="Reddit Memes Kernel"
 
 .PHONY: check
 check: ## Run code quality tools.
