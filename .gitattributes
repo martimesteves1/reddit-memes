@@ -1,0 +1,19 @@
+# Git Attributes file
+
+# Automatically normalize line endings based on the OS
+* text=auto
+
+# Force Unix-style (LF) for shell scripts and other config files
+*.sh text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Force Windows-style (CRLF) for certain types of files
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary files - Git should not alter line endings
+*.png binary
+*.jpg binary
+*.exe binary
+*.dll binary
