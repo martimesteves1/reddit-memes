@@ -2,7 +2,7 @@
 name = "reddit-memes"
 version = "0.0.1"
 description = "This project aims to predict meme success on Reddit with a multimodal approach using computer vision, generative AI and other techniques."
-authors = [{ name = "Francisco Gomes", email = "lnpg1999@gmail.com" }, { name = "Guilherme Raimundo", email = "58053@novasbe.pt" }, { name = "Marta Dinis", email = "58053@novasbe.pt" }, { name = "Martim Costa", email = "martimbdcosta@gmail.com" }, { name = "Martim Esteves", email = "46953@novasbe.pt" }]
+authors = [{ name = "Francisco Gomes", email = "lnpg1999@gmail.com" }, { name = "Guilherme Raimundo", email = "58053@novasbe.pt" }, { name = "Marta Dinis", email = "43027@novasbe.pt" }, { name = "Martim Costa", email = "martimbdcosta@gmail.com" }, { name = "Martim Esteves", email = "46953@novasbe.pt" }]
 readme = "README.md"
 keywords = ['python']
 requires-python = ">=3.12,<3.13"
