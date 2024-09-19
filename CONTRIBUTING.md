@@ -112,7 +112,7 @@ Now that you have all the necessary tools installed, you can set up the local en
 
 ```bash
 cd <directory_in_which_repo_should_be_created>
-git clone https://github.com/martimesteves1/reddit-memes/invitations
+git clone https://github.com/martimesteves1/reddit-memes.git
 ```
 
 - Navigate to the project directory and install the environment and pre-commit hooks:
