@@ -141,5 +141,7 @@ cython_debug/
 
 # Specific folders
 ## Data related
-data/sample/*
-!/data/sample/.gitkeep
+reddit_memes/data/**
+!reddit_memes/data/sample/
+reddit_memes/data/sample/**
+!reddit_memes/data/sample/.gitkeep
