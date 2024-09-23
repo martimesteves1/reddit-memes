@@ -1,6 +1,6 @@
 # Contributing to `reddit-memes`
 
-This document contains instructions and general guidelines for contributing to `reddit-memes`. The goal is to make the development process as smooth as possible, while maintaining a high level of code quality, so use your best judgment when deciding the level of detail to include in your contributions.
+This document contains instructions and general guidelines for contributing to `reddit-memes`. The goal is to make the development process as smooth as possible while maintaining a high level of code quality, so use your best judgment when deciding the level of detail to include in your contributions.
 
 # Table of Contents
 
@@ -22,13 +22,13 @@ This document contains instructions and general guidelines for contributing to `
 
 # 1. Pre-requisites
 
-One of the main libraries used for model training in the Computer Vision will be `TensorFlow`. For those who want to train models with GPU support and are on a Windows system, you will need to install WSL2 (Windows Subsystem for Linux) and install `CUDA 12.3` and `cuDNN 8.9.7`. You can follow [this step-by-step guide.](https://pradeepl.com/blog/installing-nvidia-cuda-tensorflow-on-windows-wsl2/)
+One of the main libraries used for model training in the Computer Vision part of the project will be `TensorFlow`. For those who want to train models with GPU support and are on a Windows system, you will need to install WSL2 (Windows Subsystem for Linux) and install `CUDA 12.3` and `cuDNN 8.9.7`. You can follow [this step-by-step guide.](https://pradeepl.com/blog/installing-nvidia-cuda-tensorflow-on-windows-wsl2/)
 
 It is also assumed that you have Git installed and ready to go on your system. If not, you can download it from [Git's official website.](https://git-scm.com/downloads)
 
 ## 1.1. Installing `uv`
 
-`uv` is a command-line tool that helps you manage your project's dependencies and environment. It is being used in this project due to its all-in-one solution for managing dependencies, environments and Python versions, as well as for its great speed improvements over traditional package managers like `pip`.
+`uv` is a command-line tool that helps you manage your project's dependencies and environment. It is being used in this project due to its all-in-one solution for managing dependencies, environments and Python versions, and for its great speed improvements over traditional package managers like `pip`.
 
 To install `uv`, you can run the following command:
 
@@ -50,8 +50,9 @@ Afterwards, you can check if `uv` was installed correctly by running:
 uv --version
 ```
 
-You can use `uv` outside of the project, as it is a very useful tool for managing python environments and dependencies. Popular commands:
+You can use `uv` outside of the project, as it is a very useful tool for managing Python environments and dependencies. Popular commands:
 
+```bash
 - `uv sync` - Installs all dependencies in the dependencies file.
 - `uv run` - Runs a command in the project's environment. For example, `uv run python -m my_module` will run the `my_module` module in the project's environment.
 - `uv add <package>` - Adds a package to the dependencies file and installs it.
@@ -59,11 +60,12 @@ You can use `uv` outside of the project, as it is a very useful tool for managin
 - `uv pip <regular pip syntax>` - Runs pip commands through uv
 - `uv lock` - Locks the dependencies file to the current versions of the installed packages.
 - `uv upgrade` - Upgrades all packages in the dependencies file to the latest version.
-- `uv python install <version>` - Installs a specific version of python.
+- `uv python install <version>` - Installs a specific Python version.
+```
 
 ## 1.2. Installing `make` and `awk`
 
-This step is only necessary for Windows users that are not using WSL2, and Unix-based systems have these tools installed by default. `make` and `awk` are used to run Makefile commands, which are used to automate things like installing the environment and syncing dependencies, testing and formatting code, generating documentation automatically, and more.
+This step is only necessary for Windows users that are not using WSL2, since Unix-based systems have these tools installed by default. `make` and `awk` are used to run Makefile commands, which are used to automate things like installing the environment and syncing dependencies, testing and formatting code, generating documentation automatically, and more.
 
 On Windows, you can install these programs with a package manager like `chocolatey`. To install `chocolatey`, run on Powershell with elevated privileges:
 
@@ -77,13 +79,13 @@ And confirm the installation by running (you may need to restart your terminal f
 choco --version
 ```
 
-Then run also on terminal with elevated privileges:
+Then run also on the terminal with elevated privileges:
 
 ```powershell
 choco install make awk
 ```
 
-and confirm the installation by running:
+And confirm the installation by running:
 
 ```powershell
 make --version
@@ -96,7 +98,7 @@ Some MacOS users may need to install `make`, as newer versions do not include it
 brew install make
 ```
 
-or with `xcode-select` in the terminal:
+Or with `xcode-select` in the terminal:
 
 ```bash
 xcode-select --install
@@ -142,7 +144,7 @@ source .venv/bin/activate
 
 Now you are ready to start developing! Develop your code inside the `reddit-memes\reddit_memes` directory, and put any necessary tests in the `reddit-memes\tests` directory. Don't forget to add any extra dependencies with `uv add <package>` and to lock the dependencies file with `uv lock` afterwards.
 
-If you are working with VS Code, I also recommend selecting the newly created environment as the default interpreter. You can do this by pressing `Ctrl+Shift+P` and typing `Python: Select Interpreter`, then selecting the `reddit-memes` environment in the .venv directory. This way, everytime you open the integrated terminal, it will automatically activate the environment.
+If you are working with VS Code, I also recommend selecting the newly created environment as the default interpreter. You can do this by pressing `Ctrl+Shift+P` and typing `Python: Select Interpreter`, then selecting the `reddit-memes` environment in the .venv directory. This way, every time you open the integrated terminal, it will automatically activate the environment.
 
 ---
 
@@ -153,12 +155,12 @@ If you are working with VS Code, I also recommend selecting the newly created en
 A Makefile was created to automate the most common tasks in the project. You can run the following commands:
 
 ```bash
-make install - Installs the virtual environment and pre-commit hooks.
-make check - Runs code quality tools (Ruff, Mypy, Pytest and Prettier).
-make test - Runs the tests with pytest.
-make docs-test - Tests if the documentation can be built without warnings or errors.
-make docs - Builds and serves the documentation (use it to check if docstrings are correct).
-make help - Shows all available commands.
+- make install - Installs the virtual environment and pre-commit hooks.
+- make check - Runs code quality tools (Ruff, Mypy, Pytest and Prettier).
+- make test - Runs the tests with Pytest.
+- make docs-test - Tests if the documentation can be built without warnings or errors.
+- make docs - Builds and serves the documentation (use it to check if docstrings are correct).
+- make help - Shows all available commands.
 ```
 
 Keep in mind that in order to run these commands, you **must be in the project's root directory**, where the Makefile is located.
@@ -169,7 +171,7 @@ The `make check` command often marks files for merging just by virtue of running
 
 ## 3.2. UV
 
-For this project `uv` automatically syncs the dependencies file everytime a commit is done, so make sure that you don't install packages with `uv pip install <package>` or `pip install <package>`. Instead, use `uv add <package>` and `uv remove <package>` to manage dependencies. After either adding or removing, update the dependencies file with `uv lock`.
+For this project `uv` automatically syncs the dependencies file every time a commit is done, so make sure that you don't install packages with `uv pip install <package>` or `pip install <package>`. Instead, use `uv add <package>` and `uv remove <package>` to manage dependencies. After either adding or removing, update the dependencies file with `uv lock`.
 
 With uv, you can also run commands in the project's environment with `uv run <command>`, which can be useful if you want to run a specific check individually, e.g. `uv run ruff check <file>`.
 
@@ -238,19 +240,17 @@ def process_data(data: dict[str, list[tuple[int, float]]]) -> int:
 
 #### Pytest
 
-I recommend using pytest only when you think your code is going to be either altered or is commonly used in the project.
+I recommend using Pytest only when you think your code is going to be either altered or is commonly used in the project.
 
-For example, a module that downloads images based on a link column in a pandas dataframe should have tests for things like identifying valid and invalid links, downloading the images in the correct format, saving them to the correct directory, etc.;
+For example, a module that downloads images based on a link column in a pandas dataframe should have tests for things like identifying valid and invalid links, downloading the images in the correct format, saving them to the correct directory, etc.; while a module used to train a specific computer vision model is not going to be used in other parts of the project, so it is not necessary to write tests for it.
 
-while a module used to train a specific computer vision model is not going to be used in other parts of the project, so it is not necessary to write tests for it.
-
-To run pytest, use the following command after placing your tests in the `tests` directory:
+To run Pytest, use the following command after placing your tests in the `tests` directory:
 
 ```bash
 make test
 ```
 
-or alternatively:
+Or alternatively:
 
 ```bash
 uv run pytest
