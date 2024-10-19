@@ -97,7 +97,6 @@ image_urls = [
 # Configuration parameters
 output_directory = "downloaded_images"
 desired_format = "JPEG"  # Desired image format
-allowed_image_formats = ["jpeg", "png", "gif"]  # Allowed formats
 max_threads = 10  # Number of parallel threads
 
 # Process images in parallel
@@ -105,17 +104,19 @@ process_images_parallel(
     urls=image_urls,
     output_dir=output_directory,
     target_format=desired_format,
-    allowed_formats=allowed_image_formats,
     max_workers=max_threads,
 )
 """
 
-import hashlib
 import logging
+import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from io import BytesIO
 
+import pandas as pd
+import requests
 from PIL import Image, UnidentifiedImageError
+import tqdm
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -241,7 +242,7 @@ def validate_image(
     else:
         image = Image.open(BytesIO(content))
         return image
-    
+
 def convert_image(
     image: Image.Image, target_format: str
 ) -> Image.Image | None:
@@ -294,7 +295,7 @@ def convert_image(
 
 
 def save_image(
-    image: Image.Image, output_dir: str, original_url: str, target_format: str
+    image_info: tuple(Image.Image, str), output_dir: str, original_url: str, target_format: str
 ) -> None:
     """
     Save the converted image to the specified directory with a unique filename.
@@ -325,16 +326,18 @@ def save_image(
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
 
-        # Generate a unique filename using a hash of the URL
-        url_hash = hashlib.md5(original_url.encode("utf-8")).hexdigest()
-        filename = f"{url_hash}.{target_format.lower()}"
+        image, name = image_info
+        filename = f"{name}.{target_format.lower()}"
         output_path = os.path.join(output_dir, filename)
 
         image.save(output_path, target_format.upper())
         logger.info(f"Image saved as {output_path}")
+
     except Exception:
         logger.exception(f"Failed to save image from {original_url}")
-
+        return False
+    else:
+        return True
 
 def process_image(
     url: str,
@@ -448,34 +451,38 @@ Would require major refactoring of the code, but could be a good improvement for
 Check aiohttp documentation for more information.
 """
 
+def main(input_path: str,
+         format: str = "JPEG",
+         allowed_formats: list[str] | None = ["jpeg", "png", "gif"],
+         max_workers: int = 10,
+         output_directory: str = "downloaded_images") -> None:
+    """
+    Orchestrate the image processing workflow.
 
-if __name__ == "__main__":
-    # Load the pre-processed dataset
+    This function loads the image URLs from a CSV file, configures the processing parameters,
+    and invokes the parallel processing function to handle the download, validation, conversion,
+    and saving of images.
+
+    Parameters
+    ----------
+    """
     try:
         df_urls = pd.read_csv(
-            "download_images_test_clean.csv", usecols=["url"]
+            input_path, usecols=["url"]
         )
         # df_urls = pd.read_json("download_images_test_clean.json")
         image_urls = df_urls["url"]
         del df_urls
+
     except FileNotFoundError:
         logger.exception("The .csv file with the images url was not found.")
         exit()
 
-    # Configuration parameters
-    output_directory: str = "downloaded_images"
-    desired_format: str = "JPEG"  # Desired image format
-    allowed_image_formats: list[str] | None = [
-        "jpeg",
-        "png",
-        "gif",
-    ]  # Allowed formats
-    max_threads: int = 10  # Number of parallel threads
 
     process_images_parallel(
         urls=image_urls,
         output_dir=output_directory,
-        target_format=desired_format,
-        allowed_formats=allowed_image_formats,
-        max_workers=max_threads,
+        target_format=format,
+        allowed_formats=allowed_formats,
+        max_workers=max_workers,
     )
