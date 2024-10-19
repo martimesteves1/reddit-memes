@@ -115,8 +115,8 @@ from io import BytesIO
 
 import pandas as pd
 import requests
-from PIL import Image, UnidentifiedImageError
 import tqdm
+from PIL import Image, UnidentifiedImageError
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -160,6 +160,7 @@ def download_image(
     else:
         content_type = response.headers.get("Content-Type", "").lower()
         return url, response.content, content_type
+
 
 """
 Possible improvement to download code:
@@ -243,6 +244,7 @@ def validate_image(
         image = Image.open(BytesIO(content))
         return image
 
+
 def convert_image(
     image: Image.Image, target_format: str
 ) -> Image.Image | None:
@@ -295,7 +297,10 @@ def convert_image(
 
 
 def save_image(
-    image_info: tuple(Image.Image, str), output_dir: str, original_url: str, target_format: str
+    image_info: tuple(Image.Image, str),
+    output_dir: str,
+    original_url: str,
+    target_format: str,
 ) -> None:
     """
     Save the converted image to the specified directory with a unique filename.
@@ -338,6 +343,7 @@ def save_image(
         return False
     else:
         return True
+
 
 def process_image(
     url: str,
@@ -442,6 +448,7 @@ def process_images_parallel(
             except Exception:
                 logger.exception(f"Unhandled exception for {url}")
 
+
 """
 Can improve the speeds using async and aiohttp for asyncronous requests and processing
 so that while one image is downloading the same processor can do other operations,
@@ -451,11 +458,14 @@ Would require major refactoring of the code, but could be a good improvement for
 Check aiohttp documentation for more information.
 """
 
-def main(input_path: str,
-         format: str = "JPEG",
-         allowed_formats: list[str] | None = ["jpeg", "png", "gif"],
-         max_workers: int = 10,
-         output_directory: str = "downloaded_images") -> None:
+
+def main(
+    input_path: str,
+    format: str = "JPEG",
+    allowed_formats: list[str] | None = ["jpeg", "png", "gif"],
+    max_workers: int = 10,
+    output_directory: str = "downloaded_images",
+) -> None:
     """
     Orchestrate the image processing workflow.
 
@@ -467,9 +477,7 @@ def main(input_path: str,
     ----------
     """
     try:
-        df_urls = pd.read_csv(
-            input_path, usecols=["url"]
-        )
+        df_urls = pd.read_csv(input_path, usecols=["url"])
         # df_urls = pd.read_json("download_images_test_clean.json")
         image_urls = df_urls["url"]
         del df_urls
@@ -477,7 +485,6 @@ def main(input_path: str,
     except FileNotFoundError:
         logger.exception("The .csv file with the images url was not found.")
         exit()
-
 
     process_images_parallel(
         urls=image_urls,
