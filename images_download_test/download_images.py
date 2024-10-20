@@ -1,65 +1,4 @@
 """
-import os
-import urllib.parse
-
-import pandas as pd
-import requests
-from tqdm import tqdm
-
-
-def download_images(csv_file, output_folder):
-    # Create the output folder if it doesn't exist
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
-
-    # Read the CSV file into a pandas DataFrame
-    df = pd.read_csv(csv_file)
-
-    # Function to get file extension from the response headers
-    def get_extension_from_response(response):
-        content_type = response.headers.get("content-type")
-        if content_type and "image" in content_type:
-            ext = content_type.split("/")[-1]
-            return "." + ext
-        return ".jpg"  # Default extension if none is found
-
-    # Loop over the URLs and download the images
-    for idx, url in enumerate(tqdm(df["url"])):
-        try:
-            response = requests.get(url, stream=True, timeout=10)
-            if response.status_code == 200:
-                # Extract filename from URL
-                parsed_url = urllib.parse.urlparse(url)
-                filename = os.path.basename(parsed_url.path)
-
-                # If no filename is found, create one
-                if not filename or "." not in filename:
-                    ext = get_extension_from_response(response)
-                    filename = f"image_{idx}{ext}"
-
-                # Sanitize filename to remove invalid characters
-                filename = "".join(
-                    c for c in filename if c.isalnum() or c in (" ", ".", "_")
-                ).rstrip()
-
-                file_path = os.path.join(output_folder, filename)
-
-                # Write the content to a file in chunks
-                with open(file_path, "wb") as out_file:
-                    for chunk in response.iter_content(chunk_size=1024):
-                        if chunk:
-                            out_file.write(chunk)
-
-                print(f"Downloaded {url} as {filename}")
-            else:
-                print(
-                    f"Failed to download {url} (Status code: {response.status_code})"
-                )
-        except Exception:
-            logger.exception(f"Error downloading {url}")
-"""
-
-"""
 Image Downloader and Converter Module
 =====================================
 
@@ -371,7 +310,7 @@ def process_image(
         The desired format to convert the image to (default is 'JPEG').
     allowed_formats : list of str, optional
         A list of allowed image formats for validation (e.g., ['jpeg', 'png', 'gif']).
-        If `None`, all formats are allowed.
+        If `None`, then ["jpeg", "png", "gif"] is used.
 
     Returns
     -------
@@ -379,6 +318,9 @@ def process_image(
     """
     logger.info(f"Processing {url}")
     content, content_type = download_image(url)
+
+    if allowed_formats is None:
+        allowed_formats = ["jpeg", "png", "gif"]
 
     if allowed_formats and content_type:
         mime_to_format = {
@@ -411,7 +353,7 @@ def process_images_parallel(
     urls: pd.Series,
     output_dir: str,
     target_format: str = "JPEG",
-    allowed_formats: list[str] | None = ["jpeg", "png", "gif"],
+    allowed_formats: list[str] | None = None,
     max_workers: int = 5,
 ) -> None:
     """
@@ -472,41 +414,3 @@ like downloading the next image or processing and validating the previous one.
 Would require major refactoring of the code, but could be a good improvement for the future.
 Check aiohttp documentation for more information.
 """
-
-
-def main(
-    input_path: str,
-    format: str = "JPEG",
-    allowed_formats: list[str] | None = ["jpeg", "png", "gif"],
-    max_workers: int = 10,
-    output_directory: str = "downloaded_images",
-) -> None:
-    """
-    Orchestrate the image processing workflow.
-
-    This function loads the image URLs from a CSV file, configures the processing parameters,
-    and invokes the parallel processing function to handle the download, validation, conversion,
-    and saving of images.
-
-    Parameters
-    ----------
-    """
-    try:
-        df_urls = pd.read_csv(input_path, usecols=["id", "url"])
-        # df_urls = pd.read_json("download_images_test_clean.json")
-        image_urls = df_urls["url"]
-        post_ids = df_urls["id"]
-        del df_urls
-
-    except FileNotFoundError:
-        logger.exception("Error reading the input file.")
-        exit()
-
-    process_images_parallel(
-        post_ids=post_ids,
-        urls=image_urls,
-        output_dir=output_directory,
-        target_format=format,
-        allowed_formats=allowed_formats,
-        max_workers=max_workers,
-    )
