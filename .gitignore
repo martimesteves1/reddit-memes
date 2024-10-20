@@ -139,9 +139,13 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# Specific folders
+# Specific folders/files
 ## Data related
 reddit_memes/data/**
 !reddit_memes/data/sample/
 reddit_memes/data/sample/**
 !reddit_memes/data/sample/.gitkeep
+
+*.jpeg
+*.csv
+
