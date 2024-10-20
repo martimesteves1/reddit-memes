@@ -115,8 +115,8 @@ from io import BytesIO
 
 import pandas as pd
 import requests
-import tqdm
 from PIL import Image, UnidentifiedImageError
+from tqdm import tqdm
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -299,8 +299,11 @@ def convert_image(
 
 
 def save_image(
-    post_id: str, url, image: Image.Image,
-    output_dir: str, target_format: str,
+    post_id: str,
+    url,
+    image: Image.Image,
+    output_dir: str,
+    target_format: str,
 ) -> None:
     """
     Save the converted image to the specified directory with a unique filename.
@@ -347,8 +350,11 @@ def save_image(
 
 
 def process_image(
-    post_id: str, url: str, output_dir: str,
-    target_format: str = "JPEG", allowed_formats: list[str] | None = None,
+    post_id: str,
+    url: str,
+    output_dir: str,
+    target_format: str = "JPEG",
+    allowed_formats: list[str] | None = None,
 ) -> None:
     """
     Process a single image URL by downloading, validating, converting, and saving it.
@@ -401,11 +407,11 @@ def process_image(
 
 
 def process_images_parallel(
-    post_ids: pd.Series[str],
-    urls: pd.Series[str],
+    post_ids: pd.Series,
+    urls: pd.Series,
     output_dir: str,
     target_format: str = "JPEG",
-    allowed_formats: list[str] | None = None,
+    allowed_formats: list[str] | None = ["jpeg", "png", "gif"],
     max_workers: int = 5,
 ) -> None:
     """
@@ -415,9 +421,9 @@ def process_images_parallel(
 
     Parameters
     ----------
-    post_ids : pd.Series[str]
+    post_ids : pd.Series
         The unique identifiers of the posts associated with the images.
-    urls : list of str
+    urls : pd.Series
         A list of image URLs to process.
     output_dir : str
         The directory where the processed images will be saved.
@@ -436,9 +442,14 @@ def process_images_parallel(
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         future_to_url = {
             executor.submit(
-                process_image, post_id, url, output_dir, target_format, allowed_formats
+                process_image,
+                post_id,
+                url,
+                output_dir,
+                target_format,
+                allowed_formats,
             ): url
-            for (post_id, url) in zip(post_ids, urls)
+            for (post_id, url) in zip(post_ids, urls, strict=False)
         }
 
         for future in tqdm(
@@ -499,5 +510,3 @@ def main(
         allowed_formats=allowed_formats,
         max_workers=max_workers,
     )
-
-    
