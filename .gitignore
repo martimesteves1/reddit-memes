@@ -146,4 +146,5 @@ reddit_memes/data/**
 reddit_memes/data/sample/**
 !reddit_memes/data/sample/.gitkeep
 
-.jpeg
+*.jpeg
+*.csv
