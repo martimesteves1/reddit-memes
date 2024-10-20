@@ -133,6 +133,8 @@ def download_image(
 
     Parameters
     ----------
+    post_id : str
+        The unique identifier of the post associated with the image.
     url : str
         The URL of the image to download.
     timeout : int, optional
@@ -156,10 +158,10 @@ def download_image(
         response.raise_for_status()
     except requests.RequestException:
         logger.exception(f"Error downloading {url}")
-        return url, None, None
+        return None, None
     else:
         content_type = response.headers.get("Content-Type", "").lower()
-        return url, response.content, content_type
+        return response.content, content_type
 
 
 """
@@ -297,10 +299,8 @@ def convert_image(
 
 
 def save_image(
-    image_info: tuple(Image.Image, str),
-    output_dir: str,
-    original_url: str,
-    target_format: str,
+    post_id: str, url, image: Image.Image,
+    output_dir: str, target_format: str,
 ) -> None:
     """
     Save the converted image to the specified directory with a unique filename.
@@ -309,12 +309,14 @@ def save_image(
 
     Parameters
     ----------
+    post_id : str
+        The unique identifier of the post associated with the image.
+    url : str
+        The original URL of the image.
     image : PIL.Image.Image
         The PIL Image object to save.
     output_dir : str
         The directory where the image will be saved.
-    original_url : str
-        The original URL of the image, used to generate a unique filename.
     target_format : str
         The format in which to save the image (e.g., 'JPEG').
 
@@ -331,31 +333,30 @@ def save_image(
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
 
-        image, name = image_info
-        filename = f"{name}.{target_format.lower()}"
+        filename = f"{post_id}.{target_format.lower()}"
         output_path = os.path.join(output_dir, filename)
 
         image.save(output_path, target_format.upper())
-        logger.info(f"Image saved as {output_path}")
 
     except Exception:
-        logger.exception(f"Failed to save image from {original_url}")
+        logger.exception(f"Failed to save image from {url}")
         return False
     else:
+        logger.info(f"Image saved as {output_path}")
         return True
 
 
 def process_image(
-    url: str,
-    output_dir: str,
-    target_format: str = "JPEG",
-    allowed_formats: list[str] | None = None,
+    post_id: str, url: str, output_dir: str,
+    target_format: str = "JPEG", allowed_formats: list[str] | None = None,
 ) -> None:
     """
     Process a single image URL by downloading, validating, converting, and saving it.
 
     Parameters
     ----------
+    post_id : str
+        The unique identifier of the post associated with the image.
     url : str
         The URL of the image to process.
     output_dir : str
@@ -371,7 +372,7 @@ def process_image(
     None
     """
     logger.info(f"Processing {url}")
-    _, content, content_type = download_image(url)
+    content, content_type = download_image(url)
 
     if allowed_formats and content_type:
         mime_to_format = {
@@ -396,10 +397,11 @@ def process_image(
         logger.error(f"Skipping {url} due to conversion failure.")
         return
 
-    save_image(converted_image, output_dir, url, target_format)
+    save_image(post_id, url, converted_image, output_dir, target_format)
 
 
 def process_images_parallel(
+    post_ids: pd.Series[str],
     urls: pd.Series[str],
     output_dir: str,
     target_format: str = "JPEG",
@@ -413,6 +415,8 @@ def process_images_parallel(
 
     Parameters
     ----------
+    post_ids : pd.Series[str]
+        The unique identifiers of the posts associated with the images.
     urls : list of str
         A list of image URLs to process.
     output_dir : str
@@ -432,9 +436,9 @@ def process_images_parallel(
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         future_to_url = {
             executor.submit(
-                process_image, url, output_dir, target_format, allowed_formats
+                process_image, post_id, url, output_dir, target_format, allowed_formats
             ): url
-            for url in urls
+            for (post_id, url) in zip(post_ids, urls)
         }
 
         for future in tqdm(
@@ -477,19 +481,23 @@ def main(
     ----------
     """
     try:
-        df_urls = pd.read_csv(input_path, usecols=["url"])
+        df_urls = pd.read_csv(input_path, usecols=["id", "url"])
         # df_urls = pd.read_json("download_images_test_clean.json")
         image_urls = df_urls["url"]
+        post_ids = df_urls["id"]
         del df_urls
 
     except FileNotFoundError:
-        logger.exception("The .csv file with the images url was not found.")
+        logger.exception("Error reading the input file.")
         exit()
 
     process_images_parallel(
+        post_ids=post_ids,
         urls=image_urls,
         output_dir=output_directory,
         target_format=format,
         allowed_formats=allowed_formats,
         max_workers=max_workers,
     )
+
+    
