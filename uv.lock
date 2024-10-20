@@ -1,5 +1,10 @@
 version = 1
 requires-python = "==3.12.*"
+resolution-markers = [
+    "platform_system == 'Darwin' and python_full_version == '3.12.*'",
+    "platform_machine == 'aarch64' and platform_system == 'Linux' and python_full_version == '3.12.*'",
+    "(platform_machine != 'aarch64' and platform_system != 'Darwin') or (platform_system != 'Darwin' and platform_system != 'Linux')",
+]
 
 [[package]]
 name = "absl-py"
@@ -24,7 +29,7 @@ name = "asttokens"
 version = "2.4.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "six" },
+    { name = "six", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/45/1d/f03bcb60c4a3212e15f99a56085d93093a497718adf828d050b9d675da81/asttokens-2.4.1.tar.gz", hash = "sha256:b03869718ba9a6eb027e134bfdf69f38a236d681c83c160d510768af11254ba0", size = 62284 }
 wheels = [
@@ -36,8 +41,8 @@ name = "astunparse"
 version = "1.6.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "six" },
-    { name = "wheel" },
+    { name = "six", marker = "python_full_version == '3.12.*'" },
+    { name = "wheel", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/f3/af/4182184d3c338792894f34a62672919db7ca008c89abee9b564dd34d8029/astunparse-1.6.3.tar.gz", hash = "sha256:5ad93a8456f0d084c3456d059fd9a92cce667963232cbf763eac3bc5b7940872", size = 18290 }
 wheels = [
@@ -54,6 +59,27 @@ wheels = [
 ]
 
 [[package]]
+name = "beautifulsoup4"
+version = "4.12.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "soupsieve", marker = "python_full_version == '3.12.*'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b3/ca/824b1195773ce6166d388573fc106ce56d4a805bd7427b624e063596ec58/beautifulsoup4-4.12.3.tar.gz", hash = "sha256:74e3d1928edc070d21748185c46e3fb33490f22f52a3addee9aee0f4f7781051", size = 581181 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b1/fe/e8c672695b37eecc5cbf43e1d0638d88d66ba3a44c4d321c796f4e59167f/beautifulsoup4-4.12.3-py3-none-any.whl", hash = "sha256:b80878c9f40111313e55da8ba20bdba06d8fa3969fc68304167741bbf9e082ed", size = 147925 },
+]
+
+[[package]]
+name = "blinker"
+version = "1.8.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/1e/57/a6a1721eff09598fb01f3c7cda070c1b6a0f12d63c83236edf79a440abcc/blinker-1.8.2.tar.gz", hash = "sha256:8f77b09d3bf7c795e969e9486f39c2c5e9c39d4ee07424be2bc594ece9642d83", size = 23161 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/bb/2a/10164ed1f31196a2f7f3799368a821765c62851ead0e630ab52b8e14b4d0/blinker-1.8.2-py3-none-any.whl", hash = "sha256:1779309f71bf239144b9399d06ae925637cf6634cf6bd131104184531bf67c01", size = 9456 },
+]
+
+[[package]]
 name = "certifi"
 version = "2024.8.30"
 source = { registry = "https://pypi.org/simple" }
@@ -67,7 +93,7 @@ name = "cffi"
 version = "1.17.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pycparser" },
+    { name = "pycparser", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/fc/97/c783634659c2920c3fc70419e3af40972dbaf758daa229a7d6ea6135c90d/cffi-1.17.1.tar.gz", hash = "sha256:1c39c6016c32bc48dd54561950ebd6836e1670f2ae46128f67cf49e789c52824", size = 516621 }
 wheels = [
@@ -163,7 +189,7 @@ name = "comm"
 version = "0.2.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "traitlets" },
+    { name = "traitlets", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/e9/a8/fb783cb0abe2b5fded9f55e5703015cdf1c9c85b3669087c538dd15a6a86/comm-0.2.2.tar.gz", hash = "sha256:3fd7a84065306e07bea1773df6eb8282de51ba82f77c72f9c85716ab11fe980e", size = 6210 }
 wheels = [
@@ -175,7 +201,7 @@ name = "contourpy"
 version = "1.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/f5/f6/31a8f28b4a2a4fa0e01085e542f3081ab0588eff8e589d39d775172c9792/contourpy-1.3.0.tar.gz", hash = "sha256:7ffa0db17717a8ffb127efd0c95a4362d996b892c2904db72428d5b52e1938a4", size = 13464370 }
 wheels = [
@@ -223,13 +249,13 @@ name = "dask"
 version = "2024.9.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "click" },
-    { name = "cloudpickle" },
-    { name = "fsspec" },
-    { name = "packaging" },
-    { name = "partd" },
-    { name = "pyyaml" },
-    { name = "toolz" },
+    { name = "click", marker = "python_full_version == '3.12.*'" },
+    { name = "cloudpickle", marker = "python_full_version == '3.12.*'" },
+    { name = "fsspec", marker = "python_full_version == '3.12.*'" },
+    { name = "packaging", marker = "python_full_version == '3.12.*'" },
+    { name = "partd", marker = "python_full_version == '3.12.*'" },
+    { name = "pyyaml", marker = "python_full_version == '3.12.*'" },
+    { name = "toolz", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/95/87/fb3194f41431b7b27eea595a5ad21bdcad2adc7ee67bbde4630e65b53e8c/dask-2024.9.0.tar.gz", hash = "sha256:bfbe5b6c3b7937426539be27029800178ce63cea4da8d7e7de836a98384aa1d6", size = 10147596 }
 wheels = [
@@ -238,12 +264,12 @@ wheels = [
 
 [package.optional-dependencies]
 array = [
-    { name = "numpy" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
 ]
 dataframe = [
-    { name = "dask-expr" },
-    { name = "numpy" },
-    { name = "pandas" },
+    { name = "dask-expr", marker = "python_full_version == '3.12.*'" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+    { name = "pandas", marker = "python_full_version == '3.12.*'" },
 ]
 
 [[package]]
@@ -251,9 +277,9 @@ name = "dask-expr"
 version = "1.1.14"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "dask" },
-    { name = "pandas" },
-    { name = "pyarrow" },
+    { name = "dask", marker = "python_full_version == '3.12.*'" },
+    { name = "pandas", marker = "python_full_version == '3.12.*'" },
+    { name = "pyarrow", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/5e/d6/172a7bfc714fe16343dbe88aa5ca96570e0fef06f5a7150a53ab05a76fe5/dask_expr-1.1.14.tar.gz", hash = "sha256:c67c0c190d933e253f85674da71615f23ed8ba08f3abcc0cd160080643feb40a", size = 222107 }
 wheels = [
@@ -265,13 +291,13 @@ name = "dask-glm"
 version = "0.3.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "cloudpickle" },
-    { name = "dask", extra = ["array"] },
-    { name = "distributed" },
-    { name = "multipledispatch" },
-    { name = "scikit-learn" },
-    { name = "scipy" },
-    { name = "sparse" },
+    { name = "cloudpickle", marker = "python_full_version == '3.12.*'" },
+    { name = "dask", extra = ["array"], marker = "python_full_version == '3.12.*'" },
+    { name = "distributed", marker = "python_full_version == '3.12.*'" },
+    { name = "multipledispatch", marker = "python_full_version == '3.12.*'" },
+    { name = "scikit-learn", marker = "python_full_version == '3.12.*'" },
+    { name = "scipy", marker = "python_full_version == '3.12.*'" },
+    { name = "sparse", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/da/2b/bfd5cc11f023af8a1b7c22141cb7cd3bde05384883fe7d47a1e8cf02342a/dask-glm-0.3.2.tar.gz", hash = "sha256:c947a566866698a01d79978ae73233cb5e838ad5ead6085143582c5e930b9a4a", size = 29649 }
 wheels = [
@@ -283,16 +309,16 @@ name = "dask-ml"
 version = "2024.4.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "dask", extra = ["array", "dataframe"] },
-    { name = "dask-glm" },
-    { name = "distributed" },
-    { name = "multipledispatch" },
-    { name = "numba" },
-    { name = "numpy" },
-    { name = "packaging" },
-    { name = "pandas" },
-    { name = "scikit-learn" },
-    { name = "scipy" },
+    { name = "dask", extra = ["array", "dataframe"], marker = "python_full_version == '3.12.*'" },
+    { name = "dask-glm", marker = "python_full_version == '3.12.*'" },
+    { name = "distributed", marker = "python_full_version == '3.12.*'" },
+    { name = "multipledispatch", marker = "python_full_version == '3.12.*'" },
+    { name = "numba", marker = "python_full_version == '3.12.*'" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+    { name = "packaging", marker = "python_full_version == '3.12.*'" },
+    { name = "pandas", marker = "python_full_version == '3.12.*'" },
+    { name = "scikit-learn", marker = "python_full_version == '3.12.*'" },
+    { name = "scipy", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/e2/16/bd171c0f7df2a830c457ded31b81a68af812691fcd57fd6815b64ca5c94c/dask_ml-2024.4.4.tar.gz", hash = "sha256:7956910a49e1e31944280fdb311adf245da11ef410d67deb7a05c67c7d0c4498", size = 123078 }
 wheels = [
@@ -322,12 +348,38 @@ wheels = [
 ]
 
 [[package]]
+name = "deepface"
+version = "0.0.93"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "fire", marker = "python_full_version == '3.12.*'" },
+    { name = "flask", marker = "python_full_version == '3.12.*'" },
+    { name = "flask-cors", marker = "python_full_version == '3.12.*'" },
+    { name = "gdown", marker = "python_full_version == '3.12.*'" },
+    { name = "gunicorn", marker = "python_full_version == '3.12.*'" },
+    { name = "keras", marker = "python_full_version == '3.12.*'" },
+    { name = "mtcnn", marker = "python_full_version == '3.12.*'" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+    { name = "opencv-python", marker = "python_full_version == '3.12.*'" },
+    { name = "pandas", marker = "python_full_version == '3.12.*'" },
+    { name = "pillow", marker = "python_full_version == '3.12.*'" },
+    { name = "requests", marker = "python_full_version == '3.12.*'" },
+    { name = "retina-face", marker = "python_full_version == '3.12.*'" },
+    { name = "tensorflow", marker = "python_full_version == '3.12.*'" },
+    { name = "tqdm", marker = "python_full_version == '3.12.*'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/10/95/76b2be896cff9d51aa7a7eb77bcca295f362bd32c121170c2210206404d9/deepface-0.0.93.tar.gz", hash = "sha256:7f5fc6306a3a07ee6c529b03571e64fe53d9f259e1d4091f5e28386264962b92", size = 80702 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ca/f6/4fa3f64b1a02141c037ed71a40ebf8fb8cc1ec9e860df6301fc9121bc0d4/deepface-0.0.93-py3-none-any.whl", hash = "sha256:27043e1aa5df05a060bcfe1743409075c66f6f1de86a592ba0cdac79ac9e7987", size = 108586 },
+]
+
+[[package]]
 name = "deptry"
 version = "0.20.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "click" },
-    { name = "colorama", marker = "sys_platform == 'win32'" },
+    { name = "click", marker = "python_full_version == '3.12.*'" },
+    { name = "colorama", marker = "python_full_version == '3.12.*' and sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/18/9e/7a976d923d3ae18d7dc4ace8e0c83e20a847828196e7f4b13a4bf6b03b50/deptry-0.20.0.tar.gz", hash = "sha256:62e9aaf3aea9e2ca66c85da98a0ba0290b4d3daea4e1d0ad937d447bd3c36402", size = 129936 }
 wheels = [
@@ -353,21 +405,21 @@ name = "distributed"
 version = "2024.9.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "click" },
-    { name = "cloudpickle" },
-    { name = "dask" },
-    { name = "jinja2" },
-    { name = "locket" },
-    { name = "msgpack" },
-    { name = "packaging" },
-    { name = "psutil" },
-    { name = "pyyaml" },
-    { name = "sortedcontainers" },
-    { name = "tblib" },
-    { name = "toolz" },
-    { name = "tornado" },
-    { name = "urllib3" },
-    { name = "zict" },
+    { name = "click", marker = "python_full_version == '3.12.*'" },
+    { name = "cloudpickle", marker = "python_full_version == '3.12.*'" },
+    { name = "dask", marker = "python_full_version == '3.12.*'" },
+    { name = "jinja2", marker = "python_full_version == '3.12.*'" },
+    { name = "locket", marker = "python_full_version == '3.12.*'" },
+    { name = "msgpack", marker = "python_full_version == '3.12.*'" },
+    { name = "packaging", marker = "python_full_version == '3.12.*'" },
+    { name = "psutil", marker = "python_full_version == '3.12.*'" },
+    { name = "pyyaml", marker = "python_full_version == '3.12.*'" },
+    { name = "sortedcontainers", marker = "python_full_version == '3.12.*'" },
+    { name = "tblib", marker = "python_full_version == '3.12.*'" },
+    { name = "toolz", marker = "python_full_version == '3.12.*'" },
+    { name = "tornado", marker = "python_full_version == '3.12.*'" },
+    { name = "urllib3", marker = "python_full_version == '3.12.*'" },
+    { name = "zict", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/d8/3c/24e5ef98069061a76c5ed78b19f30bd2d1027b1d34a462baa39ef4fe2820/distributed-2024.9.0.tar.gz", hash = "sha256:cb5f76ff230fc2249b15b0a66da46982e23249e5d8389c16dfe427e598b71c57", size = 1112850 }
 wheels = [
@@ -390,6 +442,43 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/e6/76/3981447fd369539aba35797db99a8e2ff7ed01d9aa63e9344a31658b8d81/filelock-3.16.0.tar.gz", hash = "sha256:81de9eb8453c769b63369f87f11131a7ab04e367f8d97ad39dc230daa07e3bec", size = 18008 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/2f/95/f9310f35376024e1086c59cbb438d319fc9a4ef853289ce7c661539edbd4/filelock-3.16.0-py3-none-any.whl", hash = "sha256:f6ed4c963184f4c84dd5557ce8fece759a3724b37b80c6c4f20a2f63a4dc6609", size = 16170 },
+]
+
+[[package]]
+name = "fire"
+version = "0.7.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "termcolor", marker = "python_full_version == '3.12.*'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6b/b6/82c7e601d6d3c3278c40b7bd35e17e82aa227f050aa9f66cb7b7fce29471/fire-0.7.0.tar.gz", hash = "sha256:961550f07936eaf65ad1dc8360f2b2bf8408fad46abbfa4d2a3794f8d2a95cdf", size = 87189 }
+
+[[package]]
+name = "flask"
+version = "3.0.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "blinker", marker = "python_full_version == '3.12.*'" },
+    { name = "click", marker = "python_full_version == '3.12.*'" },
+    { name = "itsdangerous", marker = "python_full_version == '3.12.*'" },
+    { name = "jinja2", marker = "python_full_version == '3.12.*'" },
+    { name = "werkzeug", marker = "python_full_version == '3.12.*'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/41/e1/d104c83026f8d35dfd2c261df7d64738341067526406b40190bc063e829a/flask-3.0.3.tar.gz", hash = "sha256:ceb27b0af3823ea2737928a4d99d125a06175b8512c445cbd9a9ce200ef76842", size = 676315 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/61/80/ffe1da13ad9300f87c93af113edd0638c75138c42a0994becfacac078c06/flask-3.0.3-py3-none-any.whl", hash = "sha256:34e815dfaa43340d1d15a5c3a02b8476004037eb4840b34910c6e21679d288f3", size = 101735 },
+]
+
+[[package]]
+name = "flask-cors"
+version = "5.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "flask", marker = "python_full_version == '3.12.*'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/4f/d0/d9e52b154e603b0faccc0b7c2ad36a764d8755ef4036acbf1582a67fb86b/flask_cors-5.0.0.tar.gz", hash = "sha256:5aadb4b950c4e93745034594d9f3ea6591f734bb3662e16e255ffbf5e89c88ef", size = 30954 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/56/07/1afa0514c876282bebc1c9aee83c6bb98fe6415cf57b88d9b06e7e29bf9c/Flask_Cors-5.0.0-py2.py3-none-any.whl", hash = "sha256:b9e307d082a9261c100d8fb0ba909eec6a228ed1b60a8315fd85f783d61910bc", size = 14463 },
 ]
 
 [[package]]
@@ -437,11 +526,26 @@ wheels = [
 ]
 
 [[package]]
+name = "gdown"
+version = "5.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "beautifulsoup4", marker = "python_full_version == '3.12.*'" },
+    { name = "filelock", marker = "python_full_version == '3.12.*'" },
+    { name = "requests", extra = ["socks"], marker = "python_full_version == '3.12.*'" },
+    { name = "tqdm", marker = "python_full_version == '3.12.*'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/09/6a/37e6b70c5bda3161e40265861e63b64a86bfc6ca6a8f1c35328a675c84fd/gdown-5.2.0.tar.gz", hash = "sha256:2145165062d85520a3cd98b356c9ed522c5e7984d408535409fd46f94defc787", size = 284647 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/54/70/e07c381e6488a77094f04c85c9caf1c8008cdc30778f7019bc52e5285ef0/gdown-5.2.0-py3-none-any.whl", hash = "sha256:33083832d82b1101bdd0e9df3edd0fbc0e1c5f14c9d8c38d2a35bf1683b526d6", size = 18235 },
+]
+
+[[package]]
 name = "ghp-import"
 version = "2.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "python-dateutil" },
+    { name = "python-dateutil", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/d9/29/d40217cbe2f6b1359e00c6c307bb3fc876ba74068cbab3dde77f03ca0dc4/ghp-import-2.1.0.tar.gz", hash = "sha256:9c535c4c61193c2df8871222567d7fd7e5014d835f97dc7b7439069e2413d343", size = 10943 }
 wheels = [
@@ -453,7 +557,7 @@ name = "google-pasta"
 version = "0.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "six" },
+    { name = "six", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/35/4a/0bd53b36ff0323d10d5f24ebd67af2de10a1117f5cf4d7add90df92756f1/google-pasta-0.2.0.tar.gz", hash = "sha256:c9f2c8dfc8f96d0d5808299920721be30c9eec37f2389f28904f454565c8a16e", size = 40430 }
 wheels = [
@@ -465,7 +569,7 @@ name = "griffe"
 version = "1.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama" },
+    { name = "colorama", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/ae/d1/dcd486d6d577cb12490c78cfa88679fb9b481b227807f14632ba9bd82245/griffe-1.3.1.tar.gz", hash = "sha256:3f86a716b631a4c0f96a43cb75d05d3c85975003c20540426c0eba3b0581c56a", size = 382412 }
 wheels = [
@@ -490,11 +594,23 @@ wheels = [
 ]
 
 [[package]]
+name = "gunicorn"
+version = "23.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "packaging", marker = "python_full_version == '3.12.*'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/34/72/9614c465dc206155d93eff0ca20d42e1e35afc533971379482de953521a4/gunicorn-23.0.0.tar.gz", hash = "sha256:f014447a0101dc57e294f6c18ca6b40227a4c90e9bdb586042628030cba004ec", size = 375031 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/cb/7d/6dac2a6e1eba33ee43f318edbed4ff29151a49b5d37f080aad1e6469bca4/gunicorn-23.0.0-py3-none-any.whl", hash = "sha256:ec400d38950de4dfd418cff8328b2c8faed0edb0d517d3394e457c317908ca4d", size = 85029 },
+]
+
+[[package]]
 name = "h5py"
 version = "3.11.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/52/8f/e557819155a282da36fb21f8de4730cfd10a964b52b3ae8d20157ac1c668/h5py-3.11.0.tar.gz", hash = "sha256:7b7e8f78072a2edec87c9836f25f34203fd492a4475709a18b417a33cfb21fa9", size = 406519 }
 wheels = [
@@ -509,13 +625,13 @@ name = "huggingface-hub"
 version = "0.24.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "filelock" },
-    { name = "fsspec" },
-    { name = "packaging" },
-    { name = "pyyaml" },
-    { name = "requests" },
-    { name = "tqdm" },
-    { name = "typing-extensions" },
+    { name = "filelock", marker = "python_full_version == '3.12.*'" },
+    { name = "fsspec", marker = "python_full_version == '3.12.*'" },
+    { name = "packaging", marker = "python_full_version == '3.12.*'" },
+    { name = "pyyaml", marker = "python_full_version == '3.12.*'" },
+    { name = "requests", marker = "python_full_version == '3.12.*'" },
+    { name = "tqdm", marker = "python_full_version == '3.12.*'" },
+    { name = "typing-extensions", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/af/33/d252098a3b8d910065ad09cf318efb5dbe6c8bb586269bdfb47b7e021020/huggingface_hub-0.24.7.tar.gz", hash = "sha256:0ad8fb756e2831da0ac0491175b960f341fe06ebcf80ed6f8728313f95fc0207", size = 349211 }
 wheels = [
@@ -554,19 +670,19 @@ name = "ipykernel"
 version = "6.29.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "appnope", marker = "platform_system == 'Darwin'" },
-    { name = "comm" },
-    { name = "debugpy" },
-    { name = "ipython" },
-    { name = "jupyter-client" },
-    { name = "jupyter-core" },
-    { name = "matplotlib-inline" },
-    { name = "nest-asyncio" },
-    { name = "packaging" },
-    { name = "psutil" },
-    { name = "pyzmq" },
-    { name = "tornado" },
-    { name = "traitlets" },
+    { name = "appnope", marker = "platform_system == 'Darwin' and python_full_version == '3.12.*'" },
+    { name = "comm", marker = "python_full_version == '3.12.*'" },
+    { name = "debugpy", marker = "python_full_version == '3.12.*'" },
+    { name = "ipython", marker = "python_full_version == '3.12.*'" },
+    { name = "jupyter-client", marker = "python_full_version == '3.12.*'" },
+    { name = "jupyter-core", marker = "python_full_version == '3.12.*'" },
+    { name = "matplotlib-inline", marker = "python_full_version == '3.12.*'" },
+    { name = "nest-asyncio", marker = "python_full_version == '3.12.*'" },
+    { name = "packaging", marker = "python_full_version == '3.12.*'" },
+    { name = "psutil", marker = "python_full_version == '3.12.*'" },
+    { name = "pyzmq", marker = "python_full_version == '3.12.*'" },
+    { name = "tornado", marker = "python_full_version == '3.12.*'" },
+    { name = "traitlets", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/e9/5c/67594cb0c7055dc50814b21731c22a601101ea3b1b50a9a1b090e11f5d0f/ipykernel-6.29.5.tar.gz", hash = "sha256:f093a22c4a40f8828f8e330a9c297cb93dcab13bd9678ded6de8e5cf81c56215", size = 163367 }
 wheels = [
@@ -578,15 +694,15 @@ name = "ipython"
 version = "8.27.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32'" },
-    { name = "decorator" },
-    { name = "jedi" },
-    { name = "matplotlib-inline" },
-    { name = "pexpect", marker = "sys_platform != 'emscripten' and sys_platform != 'win32'" },
-    { name = "prompt-toolkit" },
-    { name = "pygments" },
-    { name = "stack-data" },
-    { name = "traitlets" },
+    { name = "colorama", marker = "python_full_version == '3.12.*' and sys_platform == 'win32'" },
+    { name = "decorator", marker = "python_full_version == '3.12.*'" },
+    { name = "jedi", marker = "python_full_version == '3.12.*'" },
+    { name = "matplotlib-inline", marker = "python_full_version == '3.12.*'" },
+    { name = "pexpect", marker = "python_full_version == '3.12.*' and sys_platform != 'emscripten' and sys_platform != 'win32'" },
+    { name = "prompt-toolkit", marker = "python_full_version == '3.12.*'" },
+    { name = "pygments", marker = "python_full_version == '3.12.*'" },
+    { name = "stack-data", marker = "python_full_version == '3.12.*'" },
+    { name = "traitlets", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/57/24/d4fabaca03c8804bf0b8d994c8ae3a20e57e9330d277fb43d83e558dec5e/ipython-8.27.0.tar.gz", hash = "sha256:0b99a2dc9f15fd68692e898e5568725c6d49c527d36a9fb5960ffbdeaa82ff7e", size = 5494984 }
 wheels = [
@@ -594,11 +710,20 @@ wheels = [
 ]
 
 [[package]]
+name = "itsdangerous"
+version = "2.2.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/9c/cb/8ac0172223afbccb63986cc25049b154ecfb5e85932587206f42317be31d/itsdangerous-2.2.0.tar.gz", hash = "sha256:e0050c0b7da1eea53ffaf149c0cfbb5c6e2e2b69c4bef22c81fa6eb73e5f6173", size = 54410 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/04/96/92447566d16df59b2a776c0fb82dbc4d9e07cd95062562af01e408583fc4/itsdangerous-2.2.0-py3-none-any.whl", hash = "sha256:c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef", size = 16234 },
+]
+
+[[package]]
 name = "jedi"
 version = "0.19.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "parso" },
+    { name = "parso", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/d6/99/99b493cec4bf43176b678de30f81ed003fd6a647a301b9c927280c600f0a/jedi-0.19.1.tar.gz", hash = "sha256:cf0496f3651bc65d7174ac1b7d043eff454892c708a87d1b683e57b569927ffd", size = 1227821 }
 wheels = [
@@ -610,7 +735,7 @@ name = "jinja2"
 version = "3.1.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "markupsafe" },
+    { name = "markupsafe", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/ed/55/39036716d19cab0747a5020fc7e907f362fbf48c984b14e62127f7e68e5d/jinja2-3.1.4.tar.gz", hash = "sha256:4a3aee7acbbe7303aede8e9648d13b8bf88a429282aa6122a993f0ac800cb369", size = 240245 }
 wheels = [
@@ -631,11 +756,11 @@ name = "jupyter-client"
 version = "8.6.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "jupyter-core" },
-    { name = "python-dateutil" },
-    { name = "pyzmq" },
-    { name = "tornado" },
-    { name = "traitlets" },
+    { name = "jupyter-core", marker = "python_full_version == '3.12.*'" },
+    { name = "python-dateutil", marker = "python_full_version == '3.12.*'" },
+    { name = "pyzmq", marker = "python_full_version == '3.12.*'" },
+    { name = "tornado", marker = "python_full_version == '3.12.*'" },
+    { name = "traitlets", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/ff/61/3cd51dea7878691919adc34ff6ad180f13bfe25fb8c7662a9ee6dc64e643/jupyter_client-8.6.2.tar.gz", hash = "sha256:2bda14d55ee5ba58552a8c53ae43d215ad9868853489213f37da060ced54d8df", size = 341102 }
 wheels = [
@@ -647,9 +772,9 @@ name = "jupyter-core"
 version = "5.7.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "platformdirs" },
-    { name = "pywin32", marker = "platform_python_implementation != 'PyPy' and sys_platform == 'win32'" },
-    { name = "traitlets" },
+    { name = "platformdirs", marker = "python_full_version == '3.12.*'" },
+    { name = "pywin32", marker = "platform_python_implementation != 'PyPy' and python_full_version == '3.12.*' and sys_platform == 'win32'" },
+    { name = "traitlets", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/00/11/b56381fa6c3f4cc5d2cf54a7dbf98ad9aa0b339ef7a601d6053538b079a7/jupyter_core-5.7.2.tar.gz", hash = "sha256:aa5f8d32bbf6b431ac830496da7392035d6f61b4f54872f15c4bd2a9c3f536d9", size = 87629 }
 wheels = [
@@ -661,14 +786,14 @@ name = "keras"
 version = "3.5.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "absl-py" },
-    { name = "h5py" },
-    { name = "ml-dtypes" },
-    { name = "namex" },
-    { name = "numpy" },
-    { name = "optree" },
-    { name = "packaging" },
-    { name = "rich" },
+    { name = "absl-py", marker = "python_full_version == '3.12.*'" },
+    { name = "h5py", marker = "python_full_version == '3.12.*'" },
+    { name = "ml-dtypes", marker = "python_full_version == '3.12.*'" },
+    { name = "namex", marker = "python_full_version == '3.12.*'" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+    { name = "optree", marker = "python_full_version == '3.12.*'" },
+    { name = "packaging", marker = "python_full_version == '3.12.*'" },
+    { name = "rich", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/92/cb/47eab73b1c8984240dac44dbb92dcba378f2d042e7a671a78aecdfe7d84b/keras-3.5.0.tar.gz", hash = "sha256:53ae4f9472ec9d9c6941c82a3fda86969724ace3b7630a94ba0a1f17ba1065c3", size = 854337 }
 wheels = [
@@ -737,8 +862,8 @@ name = "lightgbm"
 version = "4.5.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy" },
-    { name = "scipy" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+    { name = "scipy", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/4d/e6/41be1f8642257e21b4170e798c9a84e4268656ebfa3019586d82bfd281c9/lightgbm-4.5.0.tar.gz", hash = "sha256:e1cd7baf0318d4e308a26575a63a4635f08df866ad3622a9d8e3d71d9637a1ba", size = 1701072 }
 wheels = [
@@ -772,6 +897,21 @@ wheels = [
 ]
 
 [[package]]
+name = "lz4"
+version = "4.3.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/a4/31/ec1259ca8ad11568abaf090a7da719616ca96b60d097ccc5799cd0ff599c/lz4-4.3.3.tar.gz", hash = "sha256:01fe674ef2889dbb9899d8a67361e0c4a2c833af5aeb37dd505727cf5d2a131e", size = 171509 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4d/6f/081811b17ccaec5f06b3030756af2737841447849118a6e1078481a78c6c/lz4-4.3.3-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:e36cd7b9d4d920d3bfc2369840da506fa68258f7bb176b8743189793c055e43d", size = 254213 },
+    { url = "https://files.pythonhosted.org/packages/53/4d/8e04ef75feff8848ba3c624ce81c7732bdcea5f8f994758afa88cd3d7764/lz4-4.3.3-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:31ea4be9d0059c00b2572d700bf2c1bc82f241f2c3282034a759c9a4d6ca4dc2", size = 212354 },
+    { url = "https://files.pythonhosted.org/packages/a3/04/257a72d6a879dbc8c669018989f776fcdd5b4bf3c2c51c09a54f1ca31721/lz4-4.3.3-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:33c9a6fd20767ccaf70649982f8f3eeb0884035c150c0b818ea660152cf3c809", size = 1238643 },
+    { url = "https://files.pythonhosted.org/packages/d9/93/4a7e489156fa7ded03ba9cde4a8ca7f373672b5787cac9a0391befa752a1/lz4-4.3.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:bca8fccc15e3add173da91be8f34121578dc777711ffd98d399be35487c934bf", size = 1265014 },
+    { url = "https://files.pythonhosted.org/packages/fd/a4/f84ebc23bc7602623b1b003b4e1120cbf86fb03a35c595c226be1985449b/lz4-4.3.3-cp312-cp312-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:e7d84b479ddf39fe3ea05387f10b779155fc0990125f4fb35d636114e1c63a2e", size = 1184881 },
+    { url = "https://files.pythonhosted.org/packages/de/3d/8ba48305378e84908221de143a21ba0c0ce52778893865cf85b66b1068da/lz4-4.3.3-cp312-cp312-win32.whl", hash = "sha256:337cb94488a1b060ef1685187d6ad4ba8bc61d26d631d7ba909ee984ea736be1", size = 87241 },
+    { url = "https://files.pythonhosted.org/packages/c4/5d/7b70965a0692de29af2af1007fe837f46fd456bbe2aa8f838a8543a3b5cb/lz4-4.3.3-cp312-cp312-win_amd64.whl", hash = "sha256:5d35533bf2cee56f38ced91f766cd0038b6abf46f438a80d50c52750088be93f", size = 99776 },
+]
+
+[[package]]
 name = "markdown"
 version = "3.7"
 source = { registry = "https://pypi.org/simple" }
@@ -785,7 +925,7 @@ name = "markdown-it-py"
 version = "3.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "mdurl" },
+    { name = "mdurl", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/38/71/3b932df36c1a044d397a1f92d1cf91ee0a503d91e470cbd670aa66b07ed0/markdown-it-py-3.0.0.tar.gz", hash = "sha256:e3f60a94fa066dc52ec76661e37c851cb232d92f9886b15cb560aaada2df8feb", size = 74596 }
 wheels = [
@@ -815,15 +955,15 @@ name = "matplotlib"
 version = "3.9.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "contourpy" },
-    { name = "cycler" },
-    { name = "fonttools" },
-    { name = "kiwisolver" },
-    { name = "numpy" },
-    { name = "packaging" },
-    { name = "pillow" },
-    { name = "pyparsing" },
-    { name = "python-dateutil" },
+    { name = "contourpy", marker = "python_full_version == '3.12.*'" },
+    { name = "cycler", marker = "python_full_version == '3.12.*'" },
+    { name = "fonttools", marker = "python_full_version == '3.12.*'" },
+    { name = "kiwisolver", marker = "python_full_version == '3.12.*'" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+    { name = "packaging", marker = "python_full_version == '3.12.*'" },
+    { name = "pillow", marker = "python_full_version == '3.12.*'" },
+    { name = "pyparsing", marker = "python_full_version == '3.12.*'" },
+    { name = "python-dateutil", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/9e/d8/3d7f706c69e024d4287c1110d74f7dabac91d9843b99eadc90de9efc8869/matplotlib-3.9.2.tar.gz", hash = "sha256:96ab43906269ca64a6366934106fa01534454a69e471b7bf3d79083981aaab92", size = 36088381 }
 wheels = [
@@ -851,7 +991,7 @@ name = "matplotlib-inline"
 version = "0.1.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "traitlets" },
+    { name = "traitlets", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/99/5b/a36a337438a14116b16480db471ad061c36c3694df7c2084a0da7ba538b7/matplotlib_inline-0.1.7.tar.gz", hash = "sha256:8423b23ec666be3d16e16b60bdd8ac4e86e840ebd1dd11a30b9f117f2fa0ab90", size = 8159 }
 wheels = [
@@ -881,19 +1021,19 @@ name = "mkdocs"
 version = "1.6.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "click" },
+    { name = "click", marker = "python_full_version == '3.12.*'" },
     { name = "colorama", marker = "platform_system == 'Windows'" },
-    { name = "ghp-import" },
-    { name = "jinja2" },
-    { name = "markdown" },
-    { name = "markupsafe" },
-    { name = "mergedeep" },
-    { name = "mkdocs-get-deps" },
-    { name = "packaging" },
-    { name = "pathspec" },
-    { name = "pyyaml" },
-    { name = "pyyaml-env-tag" },
-    { name = "watchdog" },
+    { name = "ghp-import", marker = "python_full_version == '3.12.*'" },
+    { name = "jinja2", marker = "python_full_version == '3.12.*'" },
+    { name = "markdown", marker = "python_full_version == '3.12.*'" },
+    { name = "markupsafe", marker = "python_full_version == '3.12.*'" },
+    { name = "mergedeep", marker = "python_full_version == '3.12.*'" },
+    { name = "mkdocs-get-deps", marker = "python_full_version == '3.12.*'" },
+    { name = "packaging", marker = "python_full_version == '3.12.*'" },
+    { name = "pathspec", marker = "python_full_version == '3.12.*'" },
+    { name = "pyyaml", marker = "python_full_version == '3.12.*'" },
+    { name = "pyyaml-env-tag", marker = "python_full_version == '3.12.*'" },
+    { name = "watchdog", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/bc/c6/bbd4f061bd16b378247f12953ffcb04786a618ce5e904b8c5a01a0309061/mkdocs-1.6.1.tar.gz", hash = "sha256:7b432f01d928c084353ab39c57282f29f92136665bdd6abf7c1ec8d822ef86f2", size = 3889159 }
 wheels = [
@@ -905,9 +1045,9 @@ name = "mkdocs-autorefs"
 version = "1.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "markdown" },
-    { name = "markupsafe" },
-    { name = "mkdocs" },
+    { name = "markdown", marker = "python_full_version == '3.12.*'" },
+    { name = "markupsafe", marker = "python_full_version == '3.12.*'" },
+    { name = "mkdocs", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/fb/ae/0f1154c614d6a8b8a36fff084e5b82af3a15f7d2060cf0dcdb1c53297a71/mkdocs_autorefs-1.2.0.tar.gz", hash = "sha256:a86b93abff653521bda71cf3fc5596342b7a23982093915cb74273f67522190f", size = 40262 }
 wheels = [
@@ -919,9 +1059,9 @@ name = "mkdocs-get-deps"
 version = "0.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "mergedeep" },
-    { name = "platformdirs" },
-    { name = "pyyaml" },
+    { name = "mergedeep", marker = "python_full_version == '3.12.*'" },
+    { name = "platformdirs", marker = "python_full_version == '3.12.*'" },
+    { name = "pyyaml", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/98/f5/ed29cd50067784976f25ed0ed6fcd3c2ce9eb90650aa3b2796ddf7b6870b/mkdocs_get_deps-0.2.0.tar.gz", hash = "sha256:162b3d129c7fad9b19abfdcb9c1458a651628e4b1dea628ac68790fb3061c60c", size = 10239 }
 wheels = [
@@ -933,17 +1073,17 @@ name = "mkdocs-material"
 version = "9.5.34"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "babel" },
-    { name = "colorama" },
-    { name = "jinja2" },
-    { name = "markdown" },
-    { name = "mkdocs" },
-    { name = "mkdocs-material-extensions" },
-    { name = "paginate" },
-    { name = "pygments" },
-    { name = "pymdown-extensions" },
-    { name = "regex" },
-    { name = "requests" },
+    { name = "babel", marker = "python_full_version == '3.12.*'" },
+    { name = "colorama", marker = "python_full_version == '3.12.*'" },
+    { name = "jinja2", marker = "python_full_version == '3.12.*'" },
+    { name = "markdown", marker = "python_full_version == '3.12.*'" },
+    { name = "mkdocs", marker = "python_full_version == '3.12.*'" },
+    { name = "mkdocs-material-extensions", marker = "python_full_version == '3.12.*'" },
+    { name = "paginate", marker = "python_full_version == '3.12.*'" },
+    { name = "pygments", marker = "python_full_version == '3.12.*'" },
+    { name = "pymdown-extensions", marker = "python_full_version == '3.12.*'" },
+    { name = "regex", marker = "python_full_version == '3.12.*'" },
+    { name = "requests", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/87/79/9b1428841d1d9331561c9d2f22f572b8ceeb67432b383bb1f74f954d92c2/mkdocs_material-9.5.34.tar.gz", hash = "sha256:1e60ddf716cfb5679dfd65900b8a25d277064ed82d9a53cd5190e3f894df7840", size = 3975085 }
 wheels = [
@@ -964,14 +1104,14 @@ name = "mkdocstrings"
 version = "0.26.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "click" },
-    { name = "jinja2" },
-    { name = "markdown" },
-    { name = "markupsafe" },
-    { name = "mkdocs" },
-    { name = "mkdocs-autorefs" },
-    { name = "platformdirs" },
-    { name = "pymdown-extensions" },
+    { name = "click", marker = "python_full_version == '3.12.*'" },
+    { name = "jinja2", marker = "python_full_version == '3.12.*'" },
+    { name = "markdown", marker = "python_full_version == '3.12.*'" },
+    { name = "markupsafe", marker = "python_full_version == '3.12.*'" },
+    { name = "mkdocs", marker = "python_full_version == '3.12.*'" },
+    { name = "mkdocs-autorefs", marker = "python_full_version == '3.12.*'" },
+    { name = "platformdirs", marker = "python_full_version == '3.12.*'" },
+    { name = "pymdown-extensions", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/e6/bf/170ff04de72227f715d67da32950c7b8434449f3805b2ec3dd1085db4d7c/mkdocstrings-0.26.1.tar.gz", hash = "sha256:bb8b8854d6713d5348ad05b069a09f3b79edbc6a0f33a34c6821141adb03fe33", size = 92677 }
 wheels = [
@@ -980,7 +1120,7 @@ wheels = [
 
 [package.optional-dependencies]
 python = [
-    { name = "mkdocstrings-python" },
+    { name = "mkdocstrings-python", marker = "python_full_version == '3.12.*'" },
 ]
 
 [[package]]
@@ -988,9 +1128,9 @@ name = "mkdocstrings-python"
 version = "1.11.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "griffe" },
-    { name = "mkdocs-autorefs" },
-    { name = "mkdocstrings" },
+    { name = "griffe", marker = "python_full_version == '3.12.*'" },
+    { name = "mkdocs-autorefs", marker = "python_full_version == '3.12.*'" },
+    { name = "mkdocstrings", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/fc/ba/534c934cd0a809f51c91332d6ed278782ee4126b8ba8db02c2003f162b47/mkdocstrings_python-1.11.1.tar.gz", hash = "sha256:8824b115c5359304ab0b5378a91f6202324a849e1da907a3485b59208b797322", size = 166890 }
 wheels = [
@@ -1002,7 +1142,7 @@ name = "ml-dtypes"
 version = "0.4.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/fd/15/76f86faa0902836cc133939732f7611ace68cf54148487a99c539c272dc8/ml_dtypes-0.4.1.tar.gz", hash = "sha256:fad5f2de464fd09127e49b7fd1252b9006fb43d2edc1ff112d390c324af5ca7a", size = 692594 }
 wheels = [
@@ -1043,6 +1183,19 @@ wheels = [
 ]
 
 [[package]]
+name = "mtcnn"
+version = "1.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "joblib", marker = "python_full_version == '3.12.*'" },
+    { name = "lz4", marker = "python_full_version == '3.12.*'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/67/37/b0f60411b6a37dcd5122bbe05c9aa45f271bcc8129caa45ee1012251905d/mtcnn-1.0.0.tar.gz", hash = "sha256:08428bf8e1ae9827d43a40bb0246b57f2239e3572d3742f472ae9924896c6419", size = 1885746 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/dc/7e/0b2b688a9e2d353a661b617b12d00d9af29f877b57c8e4a3cbe447483b46/mtcnn-1.0.0-py3-none-any.whl", hash = "sha256:0a96b4868e56db9ae984449519642be6dba03240e608a67e928ebb47833e9144", size = 1898606 },
+]
+
+[[package]]
 name = "multipledispatch"
 version = "1.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1056,8 +1209,8 @@ name = "mypy"
 version = "1.11.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "mypy-extensions" },
-    { name = "typing-extensions" },
+    { name = "mypy-extensions", marker = "python_full_version == '3.12.*'" },
+    { name = "typing-extensions", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/5c/86/5d7cbc4974fd564550b80fbb8103c05501ea11aa7835edf3351d90095896/mypy-1.11.2.tar.gz", hash = "sha256:7f9993ad3e0ffdc95c2a14b66dee63729f021968bff8ad911867579c65d13a79", size = 3078806 }
 wheels = [
@@ -1110,10 +1263,10 @@ name = "nltk"
 version = "3.9.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "click" },
-    { name = "joblib" },
-    { name = "regex" },
-    { name = "tqdm" },
+    { name = "click", marker = "python_full_version == '3.12.*'" },
+    { name = "joblib", marker = "python_full_version == '3.12.*'" },
+    { name = "regex", marker = "python_full_version == '3.12.*'" },
+    { name = "tqdm", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/3c/87/db8be88ad32c2d042420b6fd9ffd4a149f9a0d7f0e86b3f543be2eeeedd2/nltk-3.9.1.tar.gz", hash = "sha256:87d127bd3de4bd89a4f81265e5fa59cb1b199b27440175370f7417d2bc7ae868", size = 2904691 }
 wheels = [
@@ -1134,8 +1287,8 @@ name = "numba"
 version = "0.60.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "llvmlite" },
-    { name = "numpy" },
+    { name = "llvmlite", marker = "python_full_version == '3.12.*'" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/3c/93/2849300a9184775ba274aba6f82f303343669b0592b7bb0849ea713dabb0/numba-0.60.0.tar.gz", hash = "sha256:5df6158e5584eece5fc83294b949fd30b9f1125df7708862205217e068aabf16", size = 2702171 }
 wheels = [
@@ -1172,11 +1325,28 @@ wheels = [
 ]
 
 [[package]]
+name = "opencv-python"
+version = "4.10.0.84"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/4a/e7/b70a2d9ab205110d715906fc8ec83fbb00404aeb3a37a0654fdb68eb0c8c/opencv-python-4.10.0.84.tar.gz", hash = "sha256:72d234e4582e9658ffea8e9cae5b63d488ad06994ef12d81dc303b17472f3526", size = 95103981 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/66/82/564168a349148298aca281e342551404ef5521f33fba17b388ead0a84dc5/opencv_python-4.10.0.84-cp37-abi3-macosx_11_0_arm64.whl", hash = "sha256:fc182f8f4cda51b45f01c64e4cbedfc2f00aff799debebc305d8d0210c43f251", size = 54835524 },
+    { url = "https://files.pythonhosted.org/packages/64/4a/016cda9ad7cf18c58ba074628a4eaae8aa55f3fd06a266398cef8831a5b9/opencv_python-4.10.0.84-cp37-abi3-macosx_12_0_x86_64.whl", hash = "sha256:71e575744f1d23f79741450254660442785f45a0797212852ee5199ef12eed98", size = 56475426 },
+    { url = "https://files.pythonhosted.org/packages/81/e4/7a987ebecfe5ceaf32db413b67ff18eb3092c598408862fff4d7cc3fd19b/opencv_python-4.10.0.84-cp37-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:09a332b50488e2dda866a6c5573ee192fe3583239fb26ff2f7f9ceb0bc119ea6", size = 41746971 },
+    { url = "https://files.pythonhosted.org/packages/3f/a4/d2537f47fd7fcfba966bd806e3ec18e7ee1681056d4b0a9c8d983983e4d5/opencv_python-4.10.0.84-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9ace140fc6d647fbe1c692bcb2abce768973491222c067c131d80957c595b71f", size = 62548253 },
+    { url = "https://files.pythonhosted.org/packages/1e/39/bbf57e7b9dab623e8773f6ff36385456b7ae7fa9357a5e53db732c347eac/opencv_python-4.10.0.84-cp37-abi3-win32.whl", hash = "sha256:2db02bb7e50b703f0a2d50c50ced72e95c574e1e5a0bb35a8a86d0b35c98c236", size = 28737688 },
+    { url = "https://files.pythonhosted.org/packages/ec/6c/fab8113424af5049f85717e8e527ca3773299a3c6b02506e66436e19874f/opencv_python-4.10.0.84-cp37-abi3-win_amd64.whl", hash = "sha256:32dbbd94c26f611dc5cc6979e6b7aa1f55a64d6b463cc1dcd3c95505a63e48fe", size = 38842521 },
+]
+
+[[package]]
 name = "opt-einsum"
 version = "3.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/7d/bf/9257e53a0e7715bc1127e15063e831f076723c6cd60985333a1c18878fb8/opt_einsum-3.3.0.tar.gz", hash = "sha256:59f6475f77bbc37dcf7cd748519c0ec60722e91e63ca114e68821c0c54a46549", size = 73951 }
 wheels = [
@@ -1188,7 +1358,7 @@ name = "optree"
 version = "0.12.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions" },
+    { name = "typing-extensions", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/0e/c3/ef2ac05608bd6a37e153cb7fdbae7e9a75f580e24f48f1dbe6e7979d1618/optree-0.12.1.tar.gz", hash = "sha256:76a2240e7482355966a73c6c701e3d1f148420a77849c78d175d3b08bf06ff36", size = 140037 }
 wheels = [
@@ -1227,10 +1397,10 @@ name = "pandas"
 version = "2.2.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy" },
-    { name = "python-dateutil" },
-    { name = "pytz" },
-    { name = "tzdata" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+    { name = "python-dateutil", marker = "python_full_version == '3.12.*'" },
+    { name = "pytz", marker = "python_full_version == '3.12.*'" },
+    { name = "tzdata", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/88/d9/ecf715f34c73ccb1d8ceb82fc01cd1028a65a5f6dbc57bfa6ea155119058/pandas-2.2.2.tar.gz", hash = "sha256:9e79019aba43cb4fda9e4d983f8e88ca0373adbb697ae9c6c43093218de28b54", size = 4398391 }
 wheels = [
@@ -1248,8 +1418,8 @@ name = "pandas-stubs"
 version = "2.2.2.240909"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy" },
-    { name = "types-pytz" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+    { name = "types-pytz", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/39/d9/0682716a9ba539b78748f026c523ae5f280fc478381f7f1c6c037d0f0fc3/pandas_stubs-2.2.2.240909.tar.gz", hash = "sha256:3c0951a2c3e45e3475aed9d80b7147ae82f176b9e42e9fb321cfdebf3d411b3d", size = 103599 }
 wheels = [
@@ -1270,8 +1440,8 @@ name = "partd"
 version = "1.4.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "locket" },
-    { name = "toolz" },
+    { name = "locket", marker = "python_full_version == '3.12.*'" },
+    { name = "toolz", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/b2/3a/3f06f34820a31257ddcabdfafc2672c5816be79c7e353b02c1f318daa7d4/partd-1.4.2.tar.gz", hash = "sha256:d022c33afbdc8405c226621b015e8067888173d85f7f5ecebb3cafed9a20f02c", size = 21029 }
 wheels = [
@@ -1292,7 +1462,7 @@ name = "pexpect"
 version = "4.9.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "ptyprocess" },
+    { name = "ptyprocess", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/42/92/cc564bf6381ff43ce1f4d06852fc19a2f11d180f23dc32d9588bee2f149d/pexpect-4.9.0.tar.gz", hash = "sha256:ee7d41123f3c9911050ea2c2dac107568dc43b2d3b0c7557a33212c398ead30f", size = 166450 }
 wheels = [
@@ -1343,8 +1513,8 @@ name = "pipdeptree"
 version = "2.23.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "packaging" },
-    { name = "pip" },
+    { name = "packaging", marker = "python_full_version == '3.12.*'" },
+    { name = "pip", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/d5/4c/a9e8e5820f066185f392e64bd4a5335d5bdbe5d26871985f1122fb1c53ef/pipdeptree-2.23.3.tar.gz", hash = "sha256:3fcfd4e72de13a37b7921bc160af840d514738f9ea81c3f9ce080bc1e1f4eb5a", size = 39804 }
 wheels = [
@@ -1374,11 +1544,11 @@ name = "pre-commit"
 version = "3.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "cfgv" },
-    { name = "identify" },
-    { name = "nodeenv" },
-    { name = "pyyaml" },
-    { name = "virtualenv" },
+    { name = "cfgv", marker = "python_full_version == '3.12.*'" },
+    { name = "identify", marker = "python_full_version == '3.12.*'" },
+    { name = "nodeenv", marker = "python_full_version == '3.12.*'" },
+    { name = "pyyaml", marker = "python_full_version == '3.12.*'" },
+    { name = "virtualenv", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/64/10/97ee2fa54dff1e9da9badbc5e35d0bbaef0776271ea5907eccf64140f72f/pre_commit-3.8.0.tar.gz", hash = "sha256:8bb6494d4a20423842e198980c9ecf9f96607a07ea29549e180eef9ae80fe7af", size = 177815 }
 wheels = [
@@ -1390,7 +1560,7 @@ name = "prompt-toolkit"
 version = "3.0.47"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "wcwidth" },
+    { name = "wcwidth", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/47/6d/0279b119dafc74c1220420028d490c4399b790fc1256998666e3a341879f/prompt_toolkit-3.0.47.tar.gz", hash = "sha256:1e1b29cb58080b1e69f207c893a1a7bf16d127a5c30c9d17a25a5d77792e5360", size = 425859 }
 wheels = [
@@ -1451,7 +1621,7 @@ name = "pyarrow"
 version = "17.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/27/4e/ea6d43f324169f8aec0e57569443a38bab4b398d09769ca64f7b4d467de3/pyarrow-17.0.0.tar.gz", hash = "sha256:4beca9521ed2c0921c1023e68d097d0299b62c362639ea315572a58f3f50fd28", size = 1112479 }
 wheels = [
@@ -1487,8 +1657,8 @@ name = "pymdown-extensions"
 version = "10.9"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "markdown" },
-    { name = "pyyaml" },
+    { name = "markdown", marker = "python_full_version == '3.12.*'" },
+    { name = "pyyaml", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/d8/d3/fb86beeaa4416f73a28a5e8d440976b7cada2b2d7b5e715b2bd849d4de32/pymdown_extensions-10.9.tar.gz", hash = "sha256:6ff740bcd99ec4172a938970d42b96128bdc9d4b9bcad72494f29921dc69b753", size = 812128 }
 wheels = [
@@ -1505,14 +1675,23 @@ wheels = [
 ]
 
 [[package]]
+name = "pysocks"
+version = "1.7.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/bd/11/293dd436aea955d45fc4e8a35b6ae7270f5b8e00b53cf6c024c83b657a11/PySocks-1.7.1.tar.gz", hash = "sha256:3f8804571ebe159c380ac6de37643bb4685970655d3bba243530d6558b799aa0", size = 284429 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8d/59/b4572118e098ac8e46e399a1dd0f2d85403ce8bbaad9ec79373ed6badaf9/PySocks-1.7.1-py3-none-any.whl", hash = "sha256:2725bd0a9925919b9b51739eea5f9e2bae91e83288108a9ad338b2e3a4435ee5", size = 16725 },
+]
+
+[[package]]
 name = "pytest"
 version = "8.3.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32'" },
-    { name = "iniconfig" },
-    { name = "packaging" },
-    { name = "pluggy" },
+    { name = "colorama", marker = "python_full_version == '3.12.*' and sys_platform == 'win32'" },
+    { name = "iniconfig", marker = "python_full_version == '3.12.*'" },
+    { name = "packaging", marker = "python_full_version == '3.12.*'" },
+    { name = "pluggy", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/8b/6c/62bbd536103af674e227c41a8f3dcd022d591f6eed5facb5a0f31ee33bbc/pytest-8.3.3.tar.gz", hash = "sha256:70b98107bd648308a7952b06e6ca9a50bc660be218d53c257cc1fc94fda10181", size = 1442487 }
 wheels = [
@@ -1524,7 +1703,7 @@ name = "python-dateutil"
 version = "2.9.0.post0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "six" },
+    { name = "six", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/66/c0/0c8b6ad9f17a802ee498c46e004a0eb49bc148f2fd230864601a86dcf6db/python-dateutil-2.9.0.post0.tar.gz", hash = "sha256:37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3", size = 342432 }
 wheels = [
@@ -1581,7 +1760,7 @@ name = "pyyaml-env-tag"
 version = "0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pyyaml" },
+    { name = "pyyaml", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/fb/8e/da1c6c58f751b70f8ceb1eb25bc25d524e8f14fe16edcce3f4e3ba08629c/pyyaml_env_tag-0.1.tar.gz", hash = "sha256:70092675bda14fdec33b31ba77e7543de9ddc88f2e5b99160396572d11525bdb", size = 5631 }
 wheels = [
@@ -1593,7 +1772,7 @@ name = "pyzmq"
 version = "26.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "cffi", marker = "implementation_name == 'pypy'" },
+    { name = "cffi", marker = "implementation_name == 'pypy' and python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/fd/05/bed626b9f7bb2322cdbbf7b4bd8f54b1b617b0d2ab2d3547d6e39428a48e/pyzmq-26.2.0.tar.gz", hash = "sha256:070672c258581c8e4f640b5159297580a9974b026043bd4ab0470be9ed324f1f", size = 271975 }
 wheels = [
@@ -1637,47 +1816,50 @@ name = "reddit-memes"
 version = "0.0.1"
 source = { editable = "." }
 dependencies = [
-    { name = "dask" },
-    { name = "dask-ml" },
-    { name = "ipykernel" },
-    { name = "lightgbm" },
-    { name = "matplotlib" },
-    { name = "networkx" },
-    { name = "nltk" },
-    { name = "pandas" },
-    { name = "pandas-stubs" },
-    { name = "pillow" },
-    { name = "pipdeptree" },
-    { name = "pyarrow" },
-    { name = "scikit-learn" },
-    { name = "scipy" },
-    { name = "seaborn" },
-    { name = "tensorflow" },
-    { name = "transformers" },
-    { name = "types-pillow" },
-    { name = "types-requests" },
-    { name = "types-tensorflow" },
-    { name = "urllib3" },
-    { name = "xgboost" },
-    { name = "zstandard" },
+    { name = "dask", marker = "python_full_version == '3.12.*'" },
+    { name = "dask-ml", marker = "python_full_version == '3.12.*'" },
+    { name = "deepface", marker = "python_full_version == '3.12.*'" },
+    { name = "ipykernel", marker = "python_full_version == '3.12.*'" },
+    { name = "lightgbm", marker = "python_full_version == '3.12.*'" },
+    { name = "matplotlib", marker = "python_full_version == '3.12.*'" },
+    { name = "networkx", marker = "python_full_version == '3.12.*'" },
+    { name = "nltk", marker = "python_full_version == '3.12.*'" },
+    { name = "pandas", marker = "python_full_version == '3.12.*'" },
+    { name = "pandas-stubs", marker = "python_full_version == '3.12.*'" },
+    { name = "pillow", marker = "python_full_version == '3.12.*'" },
+    { name = "pipdeptree", marker = "python_full_version == '3.12.*'" },
+    { name = "pyarrow", marker = "python_full_version == '3.12.*'" },
+    { name = "scikit-learn", marker = "python_full_version == '3.12.*'" },
+    { name = "scipy", marker = "python_full_version == '3.12.*'" },
+    { name = "seaborn", marker = "python_full_version == '3.12.*'" },
+    { name = "tensorflow", marker = "python_full_version == '3.12.*'" },
+    { name = "tf-keras", marker = "python_full_version == '3.12.*'" },
+    { name = "transformers", marker = "python_full_version == '3.12.*'" },
+    { name = "types-pillow", marker = "python_full_version == '3.12.*'" },
+    { name = "types-requests", marker = "python_full_version == '3.12.*'" },
+    { name = "types-tensorflow", marker = "python_full_version == '3.12.*'" },
+    { name = "urllib3", marker = "python_full_version == '3.12.*'" },
+    { name = "xgboost", marker = "python_full_version == '3.12.*'" },
+    { name = "zstandard", marker = "python_full_version == '3.12.*'" },
 ]
 
 [package.dev-dependencies]
 dev = [
-    { name = "deptry" },
-    { name = "mkdocs" },
-    { name = "mkdocs-material" },
-    { name = "mkdocstrings", extra = ["python"] },
-    { name = "mypy" },
-    { name = "pre-commit" },
-    { name = "pytest" },
-    { name = "ruff" },
+    { name = "deptry", marker = "python_full_version == '3.12.*'" },
+    { name = "mkdocs", marker = "python_full_version == '3.12.*'" },
+    { name = "mkdocs-material", marker = "python_full_version == '3.12.*'" },
+    { name = "mkdocstrings", extra = ["python"], marker = "python_full_version == '3.12.*'" },
+    { name = "mypy", marker = "python_full_version == '3.12.*'" },
+    { name = "pre-commit", marker = "python_full_version == '3.12.*'" },
+    { name = "pytest", marker = "python_full_version == '3.12.*'" },
+    { name = "ruff", marker = "python_full_version == '3.12.*'" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "dask", specifier = ">=2024.9.0" },
     { name = "dask-ml", specifier = ">=2024.4.4" },
+    { name = "deepface", specifier = ">=0.0.93" },
     { name = "ipykernel", specifier = ">=6.29.5" },
     { name = "lightgbm", specifier = ">=4.5.0" },
     { name = "matplotlib", specifier = ">=3.9.2" },
@@ -1692,6 +1874,7 @@ requires-dist = [
     { name = "scipy", specifier = ">=1.14.1" },
     { name = "seaborn", specifier = ">=0.13.2" },
     { name = "tensorflow", specifier = ">=2.17.0" },
+    { name = "tf-keras", specifier = ">=2.17.0" },
     { name = "transformers", specifier = ">=4.44.2" },
     { name = "types-pillow", specifier = ">=10.2.0.20240822" },
     { name = "types-requests", specifier = ">=2.32.0.20240914" },
@@ -1756,14 +1939,35 @@ name = "requests"
 version = "2.32.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "certifi" },
-    { name = "charset-normalizer" },
-    { name = "idna" },
-    { name = "urllib3" },
+    { name = "certifi", marker = "python_full_version == '3.12.*'" },
+    { name = "charset-normalizer", marker = "python_full_version == '3.12.*'" },
+    { name = "idna", marker = "python_full_version == '3.12.*'" },
+    { name = "urllib3", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/63/70/2bf7780ad2d390a8d301ad0b550f1581eadbd9a20f896afe06353c2a2913/requests-2.32.3.tar.gz", hash = "sha256:55365417734eb18255590a9ff9eb97e9e1da868d4ccd6402399eaf68af20a760", size = 131218 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f9/9b/335f9764261e915ed497fcdeb11df5dfd6f7bf257d4a6a2a686d80da4d54/requests-2.32.3-py3-none-any.whl", hash = "sha256:70761cfe03c773ceb22aa2f671b4757976145175cdfca038c02654d061d6dcc6", size = 64928 },
+]
+
+[package.optional-dependencies]
+socks = [
+    { name = "pysocks", marker = "python_full_version == '3.12.*'" },
+]
+
+[[package]]
+name = "retina-face"
+version = "0.0.17"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "gdown", marker = "python_full_version == '3.12.*'" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+    { name = "opencv-python", marker = "python_full_version == '3.12.*'" },
+    { name = "pillow", marker = "python_full_version == '3.12.*'" },
+    { name = "tensorflow", marker = "python_full_version == '3.12.*'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/00/0d/76a74b93c0d9d6fd8ad450986c8f586b371ce74f7845eb3827591d8ac3e1/retina-face-0.0.17.tar.gz", hash = "sha256:7532b136ed01fe9a8cba8dfbc5a046dd6fb1214b1a83e57f3210bd145a91cd73", size = 18929 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/84/87/30c5beef6ef3cb60f80f02d3f934b86efda21aca3225f174d127192d43bb/retina_face-0.0.17-py3-none-any.whl", hash = "sha256:b43fdac4078678b9d8bc45b88a7090f05d81c44e1e10710e6c16d703bb7add41", size = 25124 },
 ]
 
 [[package]]
@@ -1771,8 +1975,8 @@ name = "rich"
 version = "13.8.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "markdown-it-py" },
-    { name = "pygments" },
+    { name = "markdown-it-py", marker = "python_full_version == '3.12.*'" },
+    { name = "pygments", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/92/76/40f084cb7db51c9d1fa29a7120717892aeda9a7711f6225692c957a93535/rich-13.8.1.tar.gz", hash = "sha256:8260cda28e3db6bf04d2d1ef4dbc03ba80a824c88b0e7668a0f23126a424844a", size = 222080 }
 wheels = [
@@ -1839,10 +2043,10 @@ name = "scikit-learn"
 version = "1.5.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "joblib" },
-    { name = "numpy" },
-    { name = "scipy" },
-    { name = "threadpoolctl" },
+    { name = "joblib", marker = "python_full_version == '3.12.*'" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+    { name = "scipy", marker = "python_full_version == '3.12.*'" },
+    { name = "threadpoolctl", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/37/59/44985a2bdc95c74e34fef3d10cb5d93ce13b0e2a7baefffe1b53853b502d/scikit_learn-1.5.2.tar.gz", hash = "sha256:b4237ed7b3fdd0a4882792e68ef2545d5baa50aca3bb45aa7df468138ad8f94d", size = 7001680 }
 wheels = [
@@ -1863,7 +2067,7 @@ name = "scipy"
 version = "1.14.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/62/11/4d44a1f274e002784e4dbdb81e0ea96d2de2d1045b2132d5af62cc31fd28/scipy-1.14.1.tar.gz", hash = "sha256:5a275584e726026a5699459aa72f828a610821006228e841b94275c4a7c08417", size = 58620554 }
 wheels = [
@@ -1890,9 +2094,9 @@ name = "seaborn"
 version = "0.13.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "matplotlib" },
-    { name = "numpy" },
-    { name = "pandas" },
+    { name = "matplotlib", marker = "python_full_version == '3.12.*'" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+    { name = "pandas", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/86/59/a451d7420a77ab0b98f7affa3a1d78a313d2f7281a57afb1a34bae8ab412/seaborn-0.13.2.tar.gz", hash = "sha256:93e60a40988f4d65e9f4885df477e2fdaff6b73a9ded434c1ab356dd57eefff7", size = 1457696 }
 wheels = [
@@ -1927,13 +2131,22 @@ wheels = [
 ]
 
 [[package]]
+name = "soupsieve"
+version = "2.6"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d7/ce/fbaeed4f9fb8b2daa961f90591662df6a86c1abf25c548329a86920aedfb/soupsieve-2.6.tar.gz", hash = "sha256:e2e68417777af359ec65daac1057404a3c8a5455bb8abc36f1a9866ab1a51abb", size = 101569 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d1/c2/fe97d779f3ef3b15f05c94a2f1e3d21732574ed441687474db9d342a7315/soupsieve-2.6-py3-none-any.whl", hash = "sha256:e72c4ff06e4fb6e4b5a9f0f55fe6e81514581fca1515028625d0f299c602ccc9", size = 36186 },
+]
+
+[[package]]
 name = "sparse"
 version = "0.15.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numba" },
-    { name = "numpy" },
-    { name = "scipy" },
+    { name = "numba", marker = "python_full_version == '3.12.*'" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+    { name = "scipy", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/26/6a/a1d00d932597c00509d333d9cde6f10d6c85470a3701455b0c48fc45886b/sparse-0.15.4.tar.gz", hash = "sha256:d4b1c57d24ff0f64f2fd5b5a95b49b7fb84ed207a26d7d58ce2764dcc5c72b84", size = 359721 }
 wheels = [
@@ -1945,9 +2158,9 @@ name = "stack-data"
 version = "0.6.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "asttokens" },
-    { name = "executing" },
-    { name = "pure-eval" },
+    { name = "asttokens", marker = "python_full_version == '3.12.*'" },
+    { name = "executing", marker = "python_full_version == '3.12.*'" },
+    { name = "pure-eval", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/28/e3/55dcc2cfbc3ca9c29519eb6884dd1415ecb53b0e934862d3559ddcb7e20b/stack_data-0.6.3.tar.gz", hash = "sha256:836a778de4fec4dcd1dcd89ed8abff8a221f58308462e1c4aa2a3cf30148f0b9", size = 44707 }
 wheels = [
@@ -1968,16 +2181,16 @@ name = "tensorboard"
 version = "2.17.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "absl-py" },
-    { name = "grpcio" },
-    { name = "markdown" },
-    { name = "numpy" },
-    { name = "packaging" },
-    { name = "protobuf" },
-    { name = "setuptools" },
-    { name = "six" },
-    { name = "tensorboard-data-server" },
-    { name = "werkzeug" },
+    { name = "absl-py", marker = "python_full_version == '3.12.*'" },
+    { name = "grpcio", marker = "python_full_version == '3.12.*'" },
+    { name = "markdown", marker = "python_full_version == '3.12.*'" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+    { name = "packaging", marker = "python_full_version == '3.12.*'" },
+    { name = "protobuf", marker = "python_full_version == '3.12.*'" },
+    { name = "setuptools", marker = "python_full_version == '3.12.*'" },
+    { name = "six", marker = "python_full_version == '3.12.*'" },
+    { name = "tensorboard-data-server", marker = "python_full_version == '3.12.*'" },
+    { name = "werkzeug", marker = "python_full_version == '3.12.*'" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d4/41/dccba8c5f955bc35b6110ff78574e4e5c8226ad62f08e732096c3861309b/tensorboard-2.17.1-py3-none-any.whl", hash = "sha256:253701a224000eeca01eee6f7e978aea7b408f60b91eb0babdb04e78947b773e", size = 5502989 },
@@ -1998,27 +2211,27 @@ name = "tensorflow"
 version = "2.17.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "absl-py" },
-    { name = "astunparse" },
-    { name = "flatbuffers" },
-    { name = "gast" },
-    { name = "google-pasta" },
-    { name = "grpcio" },
-    { name = "h5py" },
-    { name = "keras" },
-    { name = "libclang" },
-    { name = "ml-dtypes" },
-    { name = "numpy" },
-    { name = "opt-einsum" },
-    { name = "packaging" },
-    { name = "protobuf" },
-    { name = "requests" },
-    { name = "setuptools" },
-    { name = "six" },
-    { name = "tensorboard" },
-    { name = "termcolor" },
-    { name = "typing-extensions" },
-    { name = "wrapt" },
+    { name = "absl-py", marker = "python_full_version == '3.12.*'" },
+    { name = "astunparse", marker = "python_full_version == '3.12.*'" },
+    { name = "flatbuffers", marker = "python_full_version == '3.12.*'" },
+    { name = "gast", marker = "python_full_version == '3.12.*'" },
+    { name = "google-pasta", marker = "python_full_version == '3.12.*'" },
+    { name = "grpcio", marker = "python_full_version == '3.12.*'" },
+    { name = "h5py", marker = "python_full_version == '3.12.*'" },
+    { name = "keras", marker = "python_full_version == '3.12.*'" },
+    { name = "libclang", marker = "python_full_version == '3.12.*'" },
+    { name = "ml-dtypes", marker = "python_full_version == '3.12.*'" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+    { name = "opt-einsum", marker = "python_full_version == '3.12.*'" },
+    { name = "packaging", marker = "python_full_version == '3.12.*'" },
+    { name = "protobuf", marker = "python_full_version == '3.12.*'" },
+    { name = "requests", marker = "python_full_version == '3.12.*'" },
+    { name = "setuptools", marker = "python_full_version == '3.12.*'" },
+    { name = "six", marker = "python_full_version == '3.12.*'" },
+    { name = "tensorboard", marker = "python_full_version == '3.12.*'" },
+    { name = "termcolor", marker = "python_full_version == '3.12.*'" },
+    { name = "typing-extensions", marker = "python_full_version == '3.12.*'" },
+    { name = "wrapt", marker = "python_full_version == '3.12.*'" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e0/cb/aab1d277dc1cb45166a1ac857bf535ef322437f4f6fbef55ad6dee31e00d/tensorflow-2.17.0-cp312-cp312-macosx_12_0_arm64.whl", hash = "sha256:ee18b4fcd627c5e872eabb25092af6c808b6ec77948662c88fc5c89a60eb0211", size = 236281093 },
@@ -2037,6 +2250,18 @@ wheels = [
 ]
 
 [[package]]
+name = "tf-keras"
+version = "2.17.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "tensorflow", marker = "python_full_version == '3.12.*'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/dc/2b/d647100a2e80d159b020f1dbc2ef2c6787ed33c914951a63b3c88cd805d0/tf_keras-2.17.0.tar.gz", hash = "sha256:fda97c18da30da0f72a5a7e80f3eee343b09f4c206dad6c57c944fb2cd18560e", size = 1260098 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/21/8b/75f7572ec0273ed8da50bc19defe08aaaafcc15fda3407db53f49acec814/tf_keras-2.17.0-py3-none-any.whl", hash = "sha256:cc97717e4dc08487f327b0740a984043a9e0123c7a4e21206711669d3ec41c88", size = 1724905 },
+]
+
+[[package]]
 name = "threadpoolctl"
 version = "3.5.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2050,7 +2275,7 @@ name = "tokenizers"
 version = "0.19.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "huggingface-hub" },
+    { name = "huggingface-hub", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/48/04/2071c150f374aab6d5e92aaec38d0f3c368d227dd9e0469a1f0966ac68d1/tokenizers-0.19.1.tar.gz", hash = "sha256:ee59e6680ed0fdbe6b724cf38bd70400a0c1dd623b07ac729087270caeac88e3", size = 321039 }
 wheels = [
@@ -2121,16 +2346,16 @@ name = "transformers"
 version = "4.44.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "filelock" },
-    { name = "huggingface-hub" },
-    { name = "numpy" },
-    { name = "packaging" },
-    { name = "pyyaml" },
-    { name = "regex" },
-    { name = "requests" },
-    { name = "safetensors" },
-    { name = "tokenizers" },
-    { name = "tqdm" },
+    { name = "filelock", marker = "python_full_version == '3.12.*'" },
+    { name = "huggingface-hub", marker = "python_full_version == '3.12.*'" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+    { name = "packaging", marker = "python_full_version == '3.12.*'" },
+    { name = "pyyaml", marker = "python_full_version == '3.12.*'" },
+    { name = "regex", marker = "python_full_version == '3.12.*'" },
+    { name = "requests", marker = "python_full_version == '3.12.*'" },
+    { name = "safetensors", marker = "python_full_version == '3.12.*'" },
+    { name = "tokenizers", marker = "python_full_version == '3.12.*'" },
+    { name = "tqdm", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/f8/a3/81de49357a3c6ac4421d48d9662b53293838f217baf3f3bb9eb55f89fab6/transformers-4.44.2.tar.gz", hash = "sha256:36aa17cc92ee154058e426d951684a2dab48751b35b49437896f898931270826", size = 8110312 }
 wheels = [
@@ -2169,7 +2394,7 @@ name = "types-requests"
 version = "2.32.0.20240914"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "urllib3" },
+    { name = "urllib3", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/9b/9e/aea33405c230cc3984c9f1065012d3a2003cef910730c367a0e91e7a4901/types-requests-2.32.0.20240914.tar.gz", hash = "sha256:2850e178db3919d9bf809e434eef65ba49d0e7e33ac92d588f4a5e295fffd405", size = 18030 }
 wheels = [
@@ -2181,9 +2406,9 @@ name = "types-tensorflow"
 version = "2.17.0.20240820"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy" },
-    { name = "types-protobuf" },
-    { name = "types-requests" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
+    { name = "types-protobuf", marker = "python_full_version == '3.12.*'" },
+    { name = "types-requests", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/b1/99/44cfe36db6dd3f13686e4c347097f48cbde45c51da7a68b673cd60560980/types-tensorflow-2.17.0.20240820.tar.gz", hash = "sha256:8259f4458776cad1abc799fc996c38e74f5d3b7b150f6683315f40164af71414", size = 245117 }
 wheels = [
@@ -2222,9 +2447,9 @@ name = "virtualenv"
 version = "20.26.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "distlib" },
-    { name = "filelock" },
-    { name = "platformdirs" },
+    { name = "distlib", marker = "python_full_version == '3.12.*'" },
+    { name = "filelock", marker = "python_full_version == '3.12.*'" },
+    { name = "platformdirs", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/84/8a/134f65c3d6066153b84fc176c58877acd8165ed0b79a149ff50502597284/virtualenv-20.26.4.tar.gz", hash = "sha256:c17f4e0f3e6036e9f26700446f85c76ab11df65ff6d8a9cbfad9f71aabfcf23c", size = 9385017 }
 wheels = [
@@ -2269,7 +2494,7 @@ name = "werkzeug"
 version = "3.0.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "markupsafe" },
+    { name = "markupsafe", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/0f/e2/6dbcaab07560909ff8f654d3a2e5a60552d937c909455211b1b36d7101dc/werkzeug-3.0.4.tar.gz", hash = "sha256:34f2371506b250df4d4f84bfe7b0921e4762525762bbd936614909fe25cd7306", size = 803966 }
 wheels = [
@@ -2309,9 +2534,9 @@ name = "xgboost"
 version = "2.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy" },
+    { name = "numpy", marker = "python_full_version == '3.12.*'" },
     { name = "nvidia-nccl-cu12", marker = "platform_machine != 'aarch64' and platform_system == 'Linux'" },
-    { name = "scipy" },
+    { name = "scipy", marker = "python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/fa/34/61667c6b7f997dd7018b095562c718b41f9d1ece9b42047438a0ad12c4f5/xgboost-2.1.1.tar.gz", hash = "sha256:4b1729837f9f1ba88a32ef1be3f8efb860fee6454a68719b196dc88032c23d97", size = 1089959 }
 wheels = [
@@ -2338,7 +2563,7 @@ name = "zstandard"
 version = "0.23.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "cffi", marker = "platform_python_implementation == 'PyPy'" },
+    { name = "cffi", marker = "platform_python_implementation == 'PyPy' and python_full_version == '3.12.*'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/ed/f6/2ac0287b442160a89d726b17a9184a4c615bb5237db763791a7fd16d9df1/zstandard-0.23.0.tar.gz", hash = "sha256:b2d8c62d08e7255f68f7a740bae85b3c9b8e5466baa9cbf7f57f1cde0ac6bc09", size = 681701 }
 wheels = [
