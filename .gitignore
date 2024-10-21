@@ -141,6 +141,7 @@ cython_debug/
 
 # Specific folders/files
 ## Data related
+reddit-memes/DATA/
 reddit_memes/data/**
 !reddit_memes/data/sample/
 reddit_memes/data/sample/**
@@ -148,4 +149,3 @@ reddit_memes/data/sample/**
 
 *.jpeg
 *.csv
-
