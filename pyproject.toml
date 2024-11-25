@@ -33,6 +33,7 @@ dependencies = [
     "tf-keras>=2.16.0",
     "tensorflow[and-cuda]==2.16.1",
     "ollama>=0.3.3",
+    "tensorflow-hub>=0.16.1",
 ]
 
 [project.urls]
