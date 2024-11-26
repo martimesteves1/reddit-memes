@@ -99,7 +99,7 @@ def infer_from_df(df: pd.DataFrame, model: str, prompt: str, image_dir: str, out
         except:
             logging.error(f"Failed to infer prompt for image: {id}")
             logging.debug(traceback.format_exc())
-            raise
+            continue
         
         result_formatted = {
             "id": id,

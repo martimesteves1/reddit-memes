@@ -107,9 +107,9 @@ def remove_outliers_iqr(
         ]
         final_count = df_filtered.shape[0]
 
-        print(
+        logging.info(
             f"Removed {initial_count - final_count} outliers from {col}"
-        )  # Use logging here TODO
+        )
 
     return df_filtered
 
@@ -189,8 +189,8 @@ def resize_images(input_path: str, output_resolution: tuple[int, int],
 )
     len_output = len(os.listdir(output_folder))
     logging.info(
-        f"Resized {len_output} images out of {len_input}",
-        f"to {output_resolution}"
+        f"Resized {len_output} images out of {len_input}" +
+        f" to {output_resolution}"
         )
     return None
 
