@@ -158,6 +158,7 @@ def infer_from_df(df: pd.DataFrame, model: str, prompt: str, image_dir: str, out
     stable_list = ["screenshot", "text", "photo", "drawing"]
     remixed_list = ["emotional_reaction", "template", "event_reaction", "macro",
                     "situational", "comic", "meme_character"]
+    all_labels = stable_list + remixed_list + ["none"]
     
     for i, id in enumerate(tqdm(df["id"], desc="Infering prompts", unit="image"), start=1):
         image_path = os.path.join(image_dir, f"{id}.jpeg")
@@ -186,9 +187,12 @@ def infer_from_df(df: pd.DataFrame, model: str, prompt: str, image_dir: str, out
         if i % 1000 == 0:
             df_labelled.to_csv(output_path.replace(".csv", f"_partial_{i}.csv"), index=False)
 
-    df_labelled = pd.concat([df_labelled, pd.get_dummies(df_labelled["label_clean"])], axis=1)
-    df_labelled["stable"] = df_labelled["label_clean"].apply(lambda x: 1 if x in stable_list else 0)
-    df_labelled["remixed"] = df_labelled["label_clean"].apply(lambda x: 1 if x in remixed_list else 0)
+    dummies = pd.get_dummies(df_labelled["label_clean"])
+    dummies = dummies.reindex(columns=all_labels, fill_value=False)
+    df_labelled = pd.concat([df_labelled, dummies], axis=1)
+
+    df_labelled["stable"] = df_labelled["label_clean"].apply(lambda x: True if x in stable_list else False)
+    df_labelled["remixed"] = df_labelled["label_clean"].apply(lambda x: True if x in remixed_list else False)
     
     df_labelled.to_csv(output_path, index=False)
 
@@ -232,6 +236,7 @@ def infer_n_from_df(df: pd.DataFrame, model: str, prompt: str, image_dir: str, o
     stable_list = ["screenshot", "text", "photo", "drawing"]
     remixed_list = ["emotional_reaction", "template", "event_reaction", "macro",
                     "situational", "comic", "meme_character"]
+    all_labels = stable_list + remixed_list + ["none"]
     
     for i, id in enumerate(tqdm(df["id"], desc="Infering prompts", unit="image"), start=1):
         image_path = os.path.join(image_dir, f"{id}.jpeg")
@@ -274,12 +279,107 @@ def infer_n_from_df(df: pd.DataFrame, model: str, prompt: str, image_dir: str, o
         if i % 1000 == 0:
             df_labelled.to_csv(output_path.replace(".csv", f"_partial_{i}.csv"), index=False)
 
-    df_labelled = pd.concat([df_labelled, pd.get_dummies(df_labelled["label_common"])], axis=1)
-    df_labelled["stable"] = df_labelled["label_common"].apply(lambda x: 1 if x in stable_list else 0)
-    df_labelled["remixed"] = df_labelled["label_common"].apply(lambda x: 1 if x in remixed_list else 0)
+    dummies = pd.get_dummies(df_labelled["label_clean"])
+    dummies = dummies.reindex(columns=all_labels, fill_value=False)
+    df_labelled = pd.concat([df_labelled, dummies], axis=1)
+
+    df_labelled["stable"] = df_labelled["label_clean"].apply(lambda x: True if x in stable_list else False)
+    df_labelled["remixed"] = df_labelled["label_clean"].apply(lambda x: True if x in remixed_list else False)
     
     df_labelled.to_csv(output_path, index=False)
 
     logging.info(f"Saved labelled DataFrame to: {output_path} ({df_labelled.shape[0]} rows)")
 
     return df_labelled
+"""
+
+def load_data(manual_csv: str, model_csv: str) -> tuple[pd.DataFrame, pd.DataFrame]:
+
+
+    Args:
+        manual_csv (str): The path to the manual CSV file.
+        model_csv (str): The path to the model CSV file.
+
+    Returns:
+        pd.DataFrame: The manual DataFrame.
+        pd.DataFrame: The model DataFrame.
+    try:
+        manual_df = pd.read_csv(manual_csv)
+    except:
+        logging.error(f"Failed to load manual CSV: {manual_csv}")
+        logging.debug(traceback.format_exc())
+        raise
+    try:
+        model_df = pd.read_csv(model_csv)
+    except:
+        logging.error(f"Failed to load model CSV: {model_csv}")
+        logging.debug(traceback.format_exc())
+        raise
+    logging.info("Loaded Data Successfully")
+
+    return manual_df, model_df
+
+
+def calculate_accuracy(manual_df, model_df, exclude_none=False):
+
+    manual_df = manual_df.set_index('entry_id')
+    model_df = model_df.set_index('entry_id')
+    
+    if exclude_none:
+        model_df = model_df[model_df.ne('none').any(axis=1)]
+    
+    matched = manual_df & model_df
+    accuracy = matched.sum().sum() / manual_df.sum().sum()
+    
+    return accuracy
+
+def calculate_percentage_of_nones(model_df):
+    none_count = model_df.isin(['none']).sum(axis=1).sum()
+    total_entries = model_df.shape[0]
+    return (none_count / total_entries) * 100
+
+def visualize_results(manual_df, model_df, exclude_none=True):
+    
+    Visualize the results with and without 'none' entries.
+    
+    manual_df = manual_df.set_index('entry_id')
+    model_df = model_df.set_index('entry_id')
+
+    if exclude_none:
+        model_df = model_df[model_df.ne('none').any(axis=1)]
+    
+    matched = manual_df & model_df
+    category_match = matched.sum(axis=0)
+    category_total = manual_df.sum(axis=0)
+    accuracy_per_category = (category_match / category_total).fillna(0)
+
+    # Plot accuracy per category
+    plt.figure(figsize=(10, 6))
+    sns.barplot(x=accuracy_per_category.index, y=accuracy_per_category.values)
+    plt.xticks(rotation=45, ha='right')
+    plt.ylabel('Accuracy')
+    plt.title('Accuracy Per Category')
+    plt.show()
+
+def main(manual_csv, model_csv):
+    # Load data
+    manual_df, model_df = load_data(manual_csv, model_csv)
+
+    # Calculate and report overall accuracy
+    accuracy_with_none = calculate_accuracy(manual_df, model_df, exclude_none=False)
+    accuracy_without_none = calculate_accuracy(manual_df, model_df, exclude_none=True)
+    print(f'Accuracy with None: {accuracy_with_none:.2%}')
+    print(f'Accuracy without None: {accuracy_without_none:.2%}')
+
+    # Calculate and report percentage of None entries
+    none_percentage = calculate_percentage_of_nones(model_df)
+    print(f'Percentage of None entries: {none_percentage:.2f}%')
+
+    # Visualize results
+    visualize_results(manual_df, model_df, exclude_none=True)
+
+# Replace with your file paths
+manual_csv_path = 'path_to_manual_labels.csv'
+model_csv_path = 'path_to_model_inferences.csv'
+main(manual_csv_path, model_csv_path)
+"""
