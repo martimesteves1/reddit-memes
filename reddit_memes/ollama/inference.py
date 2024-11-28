@@ -291,18 +291,19 @@ def infer_n_from_df(df: pd.DataFrame, model: str, prompt: str, image_dir: str, o
     logging.info(f"Saved labelled DataFrame to: {output_path} ({df_labelled.shape[0]} rows)")
 
     return df_labelled
-"""
+
 
 def load_data(manual_csv: str, model_csv: str) -> tuple[pd.DataFrame, pd.DataFrame]:
-
-
-    Args:
-        manual_csv (str): The path to the manual CSV file.
-        model_csv (str): The path to the model CSV file.
-
+    """
+    Load the manual and model infered labels from the given CSV files.
+    
+    Arguments:
+        manual_csv (str): The path to the manual labels CSV file.
+        model_csv (str): The path to the model labels CSV file.
+    
     Returns:
-        pd.DataFrame: The manual DataFrame.
-        pd.DataFrame: The model DataFrame.
+        tuple[pd.DataFrame, pd.DataFrame]: The manual and model DataFrames.
+    """
     try:
         manual_df = pd.read_csv(manual_csv)
     except:
@@ -320,66 +321,78 @@ def load_data(manual_csv: str, model_csv: str) -> tuple[pd.DataFrame, pd.DataFra
     return manual_df, model_df
 
 
-def calculate_accuracy(manual_df, model_df, exclude_none=False):
+def calculate_match(df_manual, df_model, exclude_none=False) -> pd.DataFrame:
+    """
+    Calculate the label matches of the model against the manual labels.
 
-    manual_df = manual_df.set_index('entry_id')
-    model_df = model_df.set_index('entry_id')
+    Args:
+        df_manual (pd.DataFrame): The DataFrame containing the manual labels.
+        df_model (pd.DataFrame): The DataFrame containing the model labels.
+        exclude_none (bool): Whether to exclude 'none' entries.
     
-    if exclude_none:
-        model_df = model_df[model_df.ne('none').any(axis=1)]
-    
-    matched = manual_df & model_df
-    accuracy = matched.sum().sum() / manual_df.sum().sum()
-    
-    return accuracy
-
-def calculate_percentage_of_nones(model_df):
-    none_count = model_df.isin(['none']).sum(axis=1).sum()
-    total_entries = model_df.shape[0]
-    return (none_count / total_entries) * 100
-
-def visualize_results(manual_df, model_df, exclude_none=True):
-    
-    Visualize the results with and without 'none' entries.
-    
-    manual_df = manual_df.set_index('entry_id')
-    model_df = model_df.set_index('entry_id')
+    Returns:
+        df_match (pd.DataFrame): The DataFrame containing the matches.
+    """
+    labels_1 = ["stable", "remixed"]
+    labels_2 = ["screenshot", "text", "photo", "drawing", "emotional_reaction",
+              "template", "event_reaction", "macro", "situational", "comic",
+              "meme_character"]
+    all_labels = labels_1 + labels_2
 
     if exclude_none:
-        model_df = model_df[model_df.ne('none').any(axis=1)]
+        df_model = df_model[~df_model["none"]]
+
+    df_model = df_model.set_index("id")[all_labels]
+    df_manual = df_manual[df_manual["id"].isin(df_model.index)]
+    df_manual = df_manual.set_index("id")[all_labels]
+
+    df_match = df_manual & df_model
     
-    matched = manual_df & model_df
-    category_match = matched.sum(axis=0)
-    category_total = manual_df.sum(axis=0)
-    accuracy_per_category = (category_match / category_total).fillna(0)
+    return df_match, df_manual
 
-    # Plot accuracy per category
-    plt.figure(figsize=(10, 6))
-    sns.barplot(x=accuracy_per_category.index, y=accuracy_per_category.values)
-    plt.xticks(rotation=45, ha='right')
-    plt.ylabel('Accuracy')
-    plt.title('Accuracy Per Category')
-    plt.show()
 
-def main(manual_csv, model_csv):
-    # Load data
-    manual_df, model_df = load_data(manual_csv, model_csv)
+def calculate_percentage_of_nones(df_model) -> tuple[int, float]:
+    """
+    Calculate the percentage of labels that are 'none'
+    """
+    none_count = len(df_model[df_model["none"]])
+    total_entries = len((df_model))
 
-    # Calculate and report overall accuracy
-    accuracy_with_none = calculate_accuracy(manual_df, model_df, exclude_none=False)
-    accuracy_without_none = calculate_accuracy(manual_df, model_df, exclude_none=True)
-    print(f'Accuracy with None: {accuracy_with_none:.2%}')
-    print(f'Accuracy without None: {accuracy_without_none:.2%}')
+    return none_count, none_count / total_entries
 
-    # Calculate and report percentage of None entries
-    none_percentage = calculate_percentage_of_nones(model_df)
-    print(f'Percentage of None entries: {none_percentage:.2f}%')
 
-    # Visualize results
-    visualize_results(manual_df, model_df, exclude_none=True)
+def evaluate_results(df_manual, df_model, exclude_none=False) -> dict:
+    """
+    Computes the accuracy of the infered labels, for the first level
+    labels (stable + remixed), for the second level labels (screenshot,
+    text, ...) and for each label individually.
+    """
+    labels_1 = ["stable", "remixed"]
+    labels_2 = ["screenshot", "text", "photo", "drawing", "emotional_reaction",
+              "template", "event_reaction", "macro", "situational", "comic",
+              "meme_character"]
+    all_labels = labels_1 + labels_2
 
-# Replace with your file paths
-manual_csv_path = 'path_to_manual_labels.csv'
-model_csv_path = 'path_to_model_inferences.csv'
-main(manual_csv_path, model_csv_path)
-"""
+    df_match, df_manual = calculate_match(df_manual, df_model, exclude_none)
+    result = {}
+
+    result["accuracy_1"] = df_match[labels_1].sum().sum() / len(df_manual)
+    result["accuracy_2"] = df_match[labels_2].sum().sum() / len(df_manual)
+    for label in all_labels:
+        try:
+            result[f"accuracy_{label}"] = df_match[label].sum() / df_manual[label].sum()
+        except:
+            result[f"accuracy_{label}"] = None
+
+    n_nones, f_nones = calculate_percentage_of_nones(df_model)
+    result["n_nones"] = n_nones
+    result["f_nones"] = f_nones
+    
+    return result
+
+
+def visualize_results(*results) -> None:
+    """
+    Visualizes the results of the evaluation of multiple models.
+    """
+    pass
