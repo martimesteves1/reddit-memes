@@ -39,14 +39,14 @@ def infer(model: str, prompt: str, image_path: str, **options) -> dict:
     """
     res = ollama.chat(
         model = model,
-        messages=[
-        {
-            "role": "user",
-            "content": prompt,
-            "images": [image_path]
-        }
-    ],
-        **options
+        messages = [
+            {
+                "role": "user",
+                "content": prompt,
+                "images": [image_path]
+            }
+        ],
+        options = {**options}
     )
     result = {
         "model": model,
@@ -55,18 +55,6 @@ def infer(model: str, prompt: str, image_path: str, **options) -> dict:
         "options": {**options}
     }
     return result
-
-
-def save_inference_results(df: pd.DataFrame, output_path: str) -> None:
-    """
-    Save the inference results to a CSV file.
-
-    Args:
-        df (pd.DataFrame): The DataFrame containing the inference results.
-        output_path (str): The path to save the results.
-    """
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    pass
 
 
 def label_validator(label: str) -> str:
@@ -164,25 +152,32 @@ def infer_from_df(df: pd.DataFrame, model: str, prompt: str, image_dir: str, out
         image_path = os.path.join(image_dir, f"{id}.jpeg")
         try:
             result = infer(model, prompt, image_path, **options)
+            
         except:
             logging.error(f"Failed to infer prompt for image: {id}")
             logging.debug(traceback.format_exc())
             continue
         
-        result_formatted = {
-            "id": id,
-            "total_duration": result["total_duration"],
-            "label": result.get("label", "None"),
-            "label_clean": label_validator(result.get("label", "None")),
-            "meta": {
-                "prompt": prompt,
-                "options": {**options}
-            },
-            "labelled": True,
-            "stable": 0,
-            "remixed": 0
-        }
-        df_labelled.loc[len(df_labelled)] = result_formatted
+        else:
+            try:
+                result_formatted = {
+                    "id": id,
+                    "total_duration": result["total_duration"],
+                    "label": result.get("label", "None"),
+                    "label_clean": label_validator(result.get("label", "None")),
+                    "meta": {
+                        "prompt": prompt,
+                        "options": {**options}
+                    },
+                    "labelled": True,
+                    "stable": 0,
+                    "remixed": 0
+                }
+                df_labelled.loc[len(df_labelled)] = result_formatted
+            except:
+                logging.error(f"Unexpected Inference Result: {id}")
+                logging.debug(traceback.format_exc())
+                continue
 
         if i % 1000 == 0:
             df_labelled.to_csv(output_path.replace(".csv", f"_partial_{i}.csv"), index=False)
@@ -241,7 +236,7 @@ def infer_n_from_df(df: pd.DataFrame, model: str, prompt: str, image_dir: str, o
     for i, id in enumerate(tqdm(df["id"], desc="Infering prompts", unit="image"), start=1):
         image_path = os.path.join(image_dir, f"{id}.jpeg")
         results = []
-        for n in range(n_infer):
+        for _ in range(n_infer):
             try:
                 results.append(infer(model, prompt, image_path, **options))
             except:
@@ -258,23 +253,23 @@ def infer_n_from_df(df: pd.DataFrame, model: str, prompt: str, image_dir: str, o
             logging.error(f"Unexpected Inference Result: {id}")
             logging.debug(traceback.format_exc())
             continue
-
-        result_formatted = {
-            "id": id,
-            "total_duration": total_duration,
-            "label": labels,
-            "label_clean": labels_clean,
-            "label_common": label_common,
-            "meta": {
-                "prompt": prompt,
-                "n_infer": len(results),
-                "options": {**options}
-            },
-            "labelled": True,
-            "stable": 0,
-            "remixed": 0
-        }
-        df_labelled.loc[len(df_labelled)] = result_formatted
+        else:
+            result_formatted = {
+                "id": id,
+                "total_duration": total_duration,
+                "label": labels,
+                "label_clean": labels_clean,
+                "label_common": label_common,
+                "meta": {
+                    "prompt": prompt,
+                    "n_infer": len(results),
+                    "options": {**options}
+                },
+                "labelled": True,
+                "stable": 0,
+                "remixed": 0
+            }
+            df_labelled.loc[len(df_labelled)] = result_formatted
 
         if i % 1000 == 0:
             df_labelled.to_csv(output_path.replace(".csv", f"_partial_{i}.csv"), index=False)
@@ -291,34 +286,6 @@ def infer_n_from_df(df: pd.DataFrame, model: str, prompt: str, image_dir: str, o
     logging.info(f"Saved labelled DataFrame to: {output_path} ({df_labelled.shape[0]} rows)")
 
     return df_labelled
-
-
-def load_data(manual_csv: str, model_csv: str) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """
-    Load the manual and model infered labels from the given CSV files.
-    
-    Arguments:
-        manual_csv (str): The path to the manual labels CSV file.
-        model_csv (str): The path to the model labels CSV file.
-    
-    Returns:
-        tuple[pd.DataFrame, pd.DataFrame]: The manual and model DataFrames.
-    """
-    try:
-        manual_df = pd.read_csv(manual_csv)
-    except:
-        logging.error(f"Failed to load manual CSV: {manual_csv}")
-        logging.debug(traceback.format_exc())
-        raise
-    try:
-        model_df = pd.read_csv(model_csv)
-    except:
-        logging.error(f"Failed to load model CSV: {model_csv}")
-        logging.debug(traceback.format_exc())
-        raise
-    logging.info("Loaded Data Successfully")
-
-    return manual_df, model_df
 
 
 def calculate_match(df_manual, df_model, exclude_none=False) -> pd.DataFrame:
