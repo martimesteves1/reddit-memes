@@ -274,12 +274,14 @@ def infer_n_from_df(df: pd.DataFrame, model: str, prompt: str, image_dir: str, o
         if i % 1000 == 0:
             df_labelled.to_csv(output_path.replace(".csv", f"_partial_{i}.csv"), index=False)
 
-    dummies = pd.get_dummies(df_labelled["label_clean"])
+    df_labelled.to_csv(output_path, index=False)
+    
+    dummies = pd.get_dummies(df_labelled["label_common"])
     dummies = dummies.reindex(columns=all_labels, fill_value=False)
     df_labelled = pd.concat([df_labelled, dummies], axis=1)
 
-    df_labelled["stable"] = df_labelled["label_clean"].apply(lambda x: True if x in stable_list else False)
-    df_labelled["remixed"] = df_labelled["label_clean"].apply(lambda x: True if x in remixed_list else False)
+    df_labelled["stable"] = df_labelled["label_common"].apply(lambda x: True if x in stable_list else False)
+    df_labelled["remixed"] = df_labelled["label_common"].apply(lambda x: True if x in remixed_list else False)
     
     df_labelled.to_csv(output_path, index=False)
 

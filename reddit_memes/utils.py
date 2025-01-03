@@ -48,7 +48,7 @@ def parallelize(max_workers: int = os.cpu_count()) -> Callable:
             if args and isinstance(args[0], list | tuple):
                 args_list = args[0]
                 results = []
-                with concurrent.futures.ThreadPoolExecutor(
+                with concurrent.futures.ProcessPoolExecutor(
                     max_workers=max_workers
                 ) as executor:
                     futures = [

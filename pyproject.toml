@@ -34,6 +34,10 @@ dependencies = [
     "tensorflow[and-cuda]==2.16.1",
     "ollama>=0.3.3",
     "tensorflow-hub>=0.16.1",
+    "statsmodels>=0.14.4",
+    "stargazer>=0.0.7",
+    "python-docx>=1.1.2",
+    "beautifulsoup4>=4.12.3",
 ]
 
 [project.urls]
